@@ -1,7 +1,7 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2 } from "lucide-react";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal } from "lucide-react";
 import { Link, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -31,9 +31,10 @@ export default function LessonDetail() {
     );
   }
 
-  // Parse structured text fields (assuming they might be line-separated or simple text)
+  // Parse structured text fields
   const objectives = lesson.objectives.split('\n').filter(Boolean);
   const topics = lesson.topics.split('\n').filter(Boolean);
+  const commands = lesson.commands ? lesson.commands.split('\n').filter(Boolean) : [];
 
   return (
     <div className="flex min-h-screen bg-background font-sans">
@@ -77,7 +78,7 @@ export default function LessonDetail() {
                 {lesson.title}
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                In questa lezione approfondiremo i concetti fondamentali di {lesson.title} e come applicarli nel contesto di un'applicazione reale.
+                In questa lezione approfondiremo i concetti fondamentali di {lesson.title} seguendo il programma incrementale.
               </p>
             </motion.div>
 
@@ -130,6 +131,40 @@ export default function LessonDetail() {
                 </ul>
               </motion.div>
             </div>
+
+            {/* Commands Section */}
+            {commands.length > 0 && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="bg-muted/50 border rounded-2xl p-6"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">
+                    <Terminal className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl font-bold font-display">Comandi e Sintassi</h2>
+                </div>
+                <div className="grid gap-3">
+                  {commands.map((cmd, i) => {
+                    const [command, ...desc] = cmd.split(' - ');
+                    return (
+                      <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 bg-background border rounded-lg">
+                        <code className="text-sm font-mono text-primary font-bold bg-primary/5 px-2 py-1 rounded">
+                          {command}
+                        </code>
+                        {desc.length > 0 && (
+                          <span className="text-sm text-muted-foreground italic">
+                            — {desc.join(' - ')}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
 
             <Separator className="my-8" />
 
