@@ -25,7 +25,7 @@ export function CompletionToggle({ lessonId, isCompleted, className }: Completio
           toast({
             title: !isCompleted ? "Ottimo lavoro!" : "Stato aggiornato",
             description: !isCompleted ? "Hai completato questa lezione." : "La lezione è stata segnata come da completare.",
-            variant: !isCompleted ? "default" : "secondary",
+            variant: !isCompleted ? "default" : "secondary" as any,
           });
           setTimeout(() => setIsAnimating(false), 500);
         },

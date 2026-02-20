@@ -11,6 +11,7 @@ export const lessons = pgTable("lessons", {
   topics: text("topics").notNull(),
   homework: text("homework").notNull(),
   commands: text("commands").default("").notNull(),
+  reflectionQuestions: text("reflection_questions").default("").notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),
 });
 

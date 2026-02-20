@@ -1,14 +1,17 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal } from "lucide-react";
-import { Link, useRoute } from "wouter";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock } from "lucide-react";
+import { Link, useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function LessonDetail() {
   const [, params] = useRoute("/lesson/:id");
+  const [, setLocation] = useLocation();
   const id = params ? parseInt(params.id) : 0;
   const { data: lesson, isLoading, error } = useLesson(id);
 
@@ -21,12 +24,36 @@ export default function LessonDetail() {
   }
 
   if (error || !lesson) {
+    const isLocked = error instanceof Error && error.message.includes("bloccata");
+    
     return (
-      <div className="flex h-screen w-full flex-col items-center justify-center bg-background gap-4">
-        <div className="text-destructive font-bold text-lg">Lezione non trovata</div>
-        <Link href="/">
-          <Button variant="outline">Torna alla Dashboard</Button>
-        </Link>
+      <div className="flex h-screen w-full flex-col items-center justify-center bg-background gap-6 p-4">
+        {isLocked ? (
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-center space-y-4 max-w-md"
+          >
+            <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-10 h-10 text-muted-foreground" />
+            </div>
+            <h2 className="text-2xl font-bold">Lezione Bloccata</h2>
+            <p className="text-muted-foreground">
+              Questa lezione fa parte di un percorso incrementale. 
+              Devi completare la lezione precedente prima di poter sbloccare questa.
+            </p>
+            <Button onClick={() => setLocation("/")} className="mt-4">
+              Torna alla Dashboard
+            </Button>
+          </motion.div>
+        ) : (
+          <>
+            <div className="text-destructive font-bold text-lg">Lezione non trovata</div>
+            <Link href="/">
+              <Button variant="outline">Torna alla Dashboard</Button>
+            </Link>
+          </>
+        )}
       </div>
     );
   }
@@ -35,177 +62,182 @@ export default function LessonDetail() {
   const objectives = lesson.objectives.split('\n').filter(Boolean);
   const topics = lesson.topics.split('\n').filter(Boolean);
   const commands = lesson.commands ? lesson.commands.split('\n').filter(Boolean) : [];
+  const reflectionQuestions = lesson.reflectionQuestions ? lesson.reflectionQuestions.split('\n').filter(Boolean) : [];
 
   return (
-    <div className="flex min-h-screen bg-background font-sans">
-      <Sidebar className="hidden md:flex" />
+    <div className="flex min-h-screen bg-background font-sans selection:bg-primary/10">
+      <Sidebar className="hidden md:flex border-r bg-muted/30" />
       
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top Navigation Bar */}
-        <header className="h-16 border-b flex items-center px-4 md:px-8 bg-card/50 backdrop-blur-sm sticky top-0 z-50 justify-between">
+        <header className="h-16 border-b flex items-center px-4 md:px-8 bg-background/80 backdrop-blur-md sticky top-0 z-50 justify-between">
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted">
+              <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted transition-colors">
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             </Link>
             <div className="flex flex-col">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-primary/70 uppercase tracking-widest">
                 {lesson.module}
               </span>
-              <h1 className="text-sm md:text-base font-bold text-foreground truncate max-w-[200px] md:max-w-md">
-                Lezione {lesson.lessonNumber}: {lesson.title}
+              <h1 className="text-sm font-bold text-foreground truncate max-w-[150px] md:max-w-md">
+                {lesson.lessonNumber}. {lesson.title}
               </h1>
             </div>
           </div>
           
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-muted rounded-full text-[10px] font-bold text-muted-foreground">
+              {lesson.isCompleted ? "COMPLETATA" : "IN CORSO"}
+            </div>
             <CompletionToggle lessonId={lesson.id} isCompleted={lesson.isCompleted} />
           </div>
         </header>
 
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div className="max-w-4xl mx-auto space-y-8 pb-20">
+        {/* Content Area - Notion Style */}
+        <div className="flex-1 overflow-y-auto">
+          <article className="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
             
-            {/* Header Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-card border rounded-2xl p-8 shadow-sm"
-            >
-              <h1 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+            {/* Page Header */}
+            <header className="space-y-6">
+              <div className="flex items-center gap-2">
+                <span className="p-2 bg-primary/10 text-primary rounded-lg text-xs font-bold">
+                  Modulo {lesson.lessonNumber <= 1 ? "1" : lesson.lessonNumber <= 6 ? "2" : "3"}
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground font-display leading-[1.1]">
                 {lesson.title}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                In questa lezione approfondiremo i concetti fondamentali di {lesson.title} seguendo il programma incrementale.
+              <p className="text-xl text-muted-foreground leading-relaxed font-medium">
+                Un viaggio incrementale attraverso i concetti fondamentali, per costruire competenze solide passo dopo passo.
               </p>
-            </motion.div>
+            </header>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <Separator className="opacity-50" />
+
+            {/* Content Sections */}
+            <div className="space-y-16">
+              
               {/* Objectives */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-100 dark:border-blue-900 rounded-2xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900 text-blue-600 rounded-lg">
-                    <Target className="w-5 h-5" />
-                  </div>
-                  <h2 className="text-xl font-bold font-display text-blue-900 dark:text-blue-100">Obiettivi</h2>
-                </div>
-                <ul className="space-y-3">
-                  {objectives.map((obj, i) => (
-                    <li key={i} className="flex items-start gap-3 text-blue-800 dark:text-blue-200">
-                      <CheckCircle2 className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                      <span className="leading-relaxed">{obj}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Topics */}
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="bg-card border rounded-2xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-violet-100 dark:bg-violet-900 text-violet-600 rounded-lg">
-                    <BookOpen className="w-5 h-5" />
-                  </div>
-                  <h2 className="text-xl font-bold font-display">Argomenti Trattati</h2>
-                </div>
-                <ul className="space-y-4">
-                  {topics.map((topic, i) => (
-                    <li key={i} className="flex items-start gap-3 group">
-                      <div className="w-1.5 h-1.5 rounded-full bg-violet-400 mt-2 group-hover:bg-violet-600 transition-colors" />
-                      <span className="text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed">
-                        {topic}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </div>
-
-            {/* Commands Section */}
-            {commands.length > 0 && (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
-                className="bg-muted/50 border rounded-2xl p-6"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">
-                    <Terminal className="w-5 h-5" />
-                  </div>
-                  <h2 className="text-xl font-bold font-display">Comandi e Sintassi</h2>
+              <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <Target className="w-5 h-5 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Cosa imparerai oggi</h2>
                 </div>
                 <div className="grid gap-3">
-                  {commands.map((cmd, i) => {
-                    const [command, ...desc] = cmd.split(' - ');
-                    return (
-                      <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 bg-background border rounded-lg">
-                        <code className="text-sm font-mono text-primary font-bold bg-primary/5 px-2 py-1 rounded">
-                          {command}
-                        </code>
-                        {desc.length > 0 && (
-                          <span className="text-sm text-muted-foreground italic">
-                            — {desc.join(' - ')}
-                          </span>
-                        )}
-                      </div>
-                    );
-                  })}
+                  {objectives.map((obj, i) => (
+                    <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-muted/40 border border-transparent hover:border-primary/20 transition-all">
+                      <CheckCircle2 className="w-5 h-5 text-primary/60 mt-0.5 flex-shrink-0" />
+                      <span className="text-foreground/80 leading-relaxed">{obj}</span>
+                    </div>
+                  ))}
                 </div>
-              </motion.div>
-            )}
+              </section>
 
-            <Separator className="my-8" />
+              {/* Topics */}
+              <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <BookOpen className="w-5 h-5 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Punti chiave</h2>
+                </div>
+                <div className="prose prose-slate dark:prose-invert max-w-none">
+                  <ul className="list-none p-0 space-y-6">
+                    {topics.map((topic, i) => (
+                      <li key={i} className="relative pl-8 group">
+                        <div className="absolute left-0 top-3 w-2 h-2 rounded-full bg-primary/30 group-hover:bg-primary transition-colors" />
+                        <div className="text-lg text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed">
+                          {topic}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
 
-            {/* Homework Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-slate-900 text-slate-50 rounded-2xl p-8 relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-                    <PenTool className="w-5 h-5 text-yellow-400" />
+              {/* Commands Section */}
+              {commands.length > 0 && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Terminal className="w-5 h-5 text-primary" />
+                    <h2 className="text-2xl font-bold tracking-tight">Toolkit & Comandi</h2>
                   </div>
-                  <h2 className="text-2xl font-bold font-display text-white">Esercitazione Pratica</h2>
+                  <div className="rounded-2xl border bg-zinc-950 p-6 font-mono text-sm overflow-hidden relative">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                      <Terminal className="w-20 h-20 text-white" />
+                    </div>
+                    <div className="space-y-4 relative z-10">
+                      {commands.map((cmd, i) => {
+                        const [command, ...desc] = cmd.split(' - ');
+                        return (
+                          <div key={i} className="group">
+                            <div className="flex flex-col gap-1">
+                              <span className="text-primary-foreground/90 font-bold">$ {command}</span>
+                              {desc.length > 0 && (
+                                <span className="text-zinc-500 text-xs italic"># {desc.join(' - ')}</span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Reflections Section */}
+              {reflectionQuestions.length > 0 && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Lightbulb className="w-5 h-5 text-yellow-500" />
+                    <h2 className="text-2xl font-bold tracking-tight">Spunti di riflessione</h2>
+                  </div>
+                  <div className="grid gap-4">
+                    {reflectionQuestions.map((q, i) => (
+                      <Card key={i} className="border-none bg-yellow-50/50 dark:bg-yellow-900/10 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors">
+                        <CardContent className="p-6">
+                          <p className="text-foreground/80 italic">"{q}"</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Homework Section */}
+              <section className="space-y-6 pt-12">
+                <div className="flex items-center gap-3">
+                  <PenTool className="w-5 h-5 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Mettiamoci al lavoro</h2>
                 </div>
                 
-                <div className="prose prose-invert max-w-none">
-                  <div className="text-slate-300 leading-relaxed whitespace-pre-wrap font-medium">
-                    {lesson.homework}
+                <div className="bg-primary/5 rounded-3xl p-8 md:p-12 border border-primary/10 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+                  
+                  <div className="relative z-10 space-y-8">
+                    <div className="prose prose-slate dark:prose-invert max-w-none">
+                      <div className="text-lg leading-relaxed whitespace-pre-wrap font-medium text-foreground/90">
+                        {lesson.homework}
+                      </div>
+                    </div>
+
+                    <div className="pt-8 border-t border-primary/10 flex flex-col sm:flex-row gap-6 justify-between items-center">
+                      <p className="text-sm text-muted-foreground max-w-xs text-center sm:text-left">
+                        Ogni piccolo passo conta. Completa questa esercitazione per sbloccare la lezione successiva.
+                      </p>
+                      
+                      <CompletionToggle 
+                        lessonId={lesson.id} 
+                        isCompleted={lesson.isCompleted} 
+                        className="w-full sm:w-auto min-w-[180px]"
+                      />
+                    </div>
                   </div>
                 </div>
+              </section>
 
-                <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between items-center">
-                  <p className="text-sm text-slate-400">
-                    Completa l'esercizio per consolidare le competenze acquisite.
-                  </p>
-                  
-                  <CompletionToggle 
-                    lessonId={lesson.id} 
-                    isCompleted={lesson.isCompleted} 
-                    className="w-full sm:w-auto bg-white text-slate-900 hover:bg-slate-200 border-none"
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-          </div>
+            </div>
+          </article>
         </div>
       </main>
     </div>
