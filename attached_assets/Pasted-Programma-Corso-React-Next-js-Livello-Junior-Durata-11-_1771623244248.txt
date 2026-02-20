@@ -1,0 +1,150 @@
+Programma Corso React & Next.js – Livello Junior
+Durata: 11 lezioni
+Formato: lezioni frontali (1–1,5h) + esercitazioni incrementali con revisione
+Obiettivo del corso: imparare a sviluppare applicazioni web moderne con React e Next.js, comprendendo i concetti fondamentali del frontend, la gestione dello stato, e la pubblicazione di progetti reali su web.
+LEZIONE 1 – Git & GitHub Fundamentals
+Obiettivi:
+Comprendere i concetti base del versionamento con Git.
+Utilizzare GitHub per la collaborazione e revisione del codice.
+Apprendere un workflow professionale tramite branch feature e PR.
+Argomenti principali:
+Creazione e clonazione di repository.
+Commit, branch e merge.
+Creazione di Pull Request e code review.
+Gestione dei conflitti e convenzioni di naming.
+Esercitazione pratica:
+Creare un repository personale.
+Creare un branch di feature dedicato.
+Aprire una Pull Request, ricevere feedback e completare il merge.
+
+
+MODULO REACT – Task Manager SPA
+(Obiettivo: sviluppare una SPA completa per la gestione di task)
+LEZIONE 2 – React Basics
+Obiettivi:
+Comprendere l’architettura a componenti di React.
+Utilizzare JSX e props per la composizione dell’interfaccia.
+Argomenti:
+Creazione e riuso di componenti.
+Props e flusso unidirezionale dei dati.
+Struttura di un progetto React creato con Vite o CRA.
+Homework:
+Sviluppo componenti TaskList e TaskItem con dati mock.
+LEZIONE 3 – Stato e interazioni
+Obiettivi:
+Comprendere il concetto di stato (state) e reattività del DOM virtuale.
+Gestire input e form controllati.
+Argomenti:
+Hook useState.
+Gestione eventi (onClick, onChange).
+Form controllati e validazione base.
+Homework:
+Implementare un form di aggiunta task con validazione sui campi.
+LEZIONE 4 – Rendering dinamico
+Obiettivi:
+Visualizzare liste e contenuti condizionali.
+Comprendere come React aggiorna la UI in base ai dati.
+Argomenti:
+Metodo .map() e prop key.
+Conditional rendering con operatori logici e ternari.
+Empty states e UX.
+Homework:
+Implementare la rimozione di task e la gestione dello stato “nessun elemento”.
+LEZIONE 5 – Stato avanzato e composizione
+Obiettivi:
+Gestire più componenti che condividono stato.
+Applicare filtri, ricerche e ordinamenti ai dati.
+Argomenti:
+Lifting state up.
+Funzioni di filtro e ricerca.
+Prop drilling e component composition.
+Homework:
+Aggiungere ricerca e filtro per stato dei task (completati, in corso, ecc.).
+LEZIONE 6 – Side Effects e persistenza dati
+Obiettivi:
+Comprendere l’esecuzione di effetti collaterali.
+Salvare i dati localmente tra sessioni.
+Argomenti:
+Hook useEffect.
+Sincronizzazione con localStorage.
+Ciclo di vita del componente e cleanup.
+Output finale modulo React:
+Una SPA completa per la gestione di task, persistente e interattiva.
+MODULO NEXT.JS – Content Platform
+(Obiettivo: costruire una piattaforma di contenuti multi-pagina con Next.js)
+LEZIONE 7 – Fondamenti di Next.js
+Obiettivi:
+Comprendere la differenza tra React Client e App Router.
+Organizzare un progetto Next.js moderno.
+Argomenti:
+File system routing.
+Layout, page, e componenti server/client.
+Gestione degli assets e metadata.
+Homework:
+Creare una pagina “About” con layout personalizzato.
+
+
+LEZIONE 8 – Routing dinamico e Data Fetching
+Obiettivi:
+Server vs Client Components
+Creare rotte dinamiche e generare pagine a partire da dati.
+Imparare le modalità di data fetching nel server e nel client.
+Argomenti:
+Segmenti dinamici [slug].
+Funzioni generateStaticParams e fetch.
+Rendering condizionale basato sui dati.
+Homework:
+Creare pagina dettaglio di un post con path dinamico.
+LEZIONE 9 – API Routes e form submission
+Obiettivi:
+Saper creare endpoint server-side all’interno di Next.js.
+Gestire invii di form e richieste POST dal frontend.
+Argomenti:
+API Routes (GET, POST).
+Gestione del body e risposte JSON.
+Invio dati da un form React/Next.js.
+Homework:
+Creare un semplice form per creare articoli e salvarli via API.
+
+LEZIONE 10 – Rendering strategies
+Obiettivi:
+Differenziare tra SSG, SSR e ISR.
+Valutare vantaggi e casi d’uso.
+Argomenti:
+Static Site Generation (SSG).
+Server-Side Rendering (SSR).
+Incremental Static Regeneration (ISR).
+Ottimizzazione performance e SEO.
+Homework:
+Realizzare un esempio pratico comparando le tre strategie.
+LEZIONE 11 – Deployment e ottimizzazione finale
+Obiettivi:
+Pubblicare un’app Next.js in ambiente di produzione.
+Configurare variabili d’ambiente e middleware base.
+Argomenti:
+Gestione .env e segreti.
+Middleware e autenticazione di base.
+Deploy su Vercel (o Netlify).
+Troubleshooting post-deploy.
+
+
+Costi Investimento
+Il corso è pensato come un percorso completo e pratico, che unisce teoria, esercitazioni guidate e supporto personalizzato.​
+Ogni lezione è progettata per fornire strumenti immediatamente applicabili nel mondo del lavoro, con una metodologia chiara, moderna e basata su casi d’uso reali.​
+Il pacchetto include:
+11 lezioni frontali (1–1,5h) in diretta, con focus sullo sviluppo pratico
+Esercitazioni incrementali e tracce da completare tra una lezione e l’altra
+Code review personalizzate e feedback individuali sul codice
+Analisi delle tracce a casa, per consolidare i concetti appresi
+Sessioni di chiarimento e Q&A one-to-one, per risolvere dubbi o approfondire specifici argomenti
+Accesso alle risorse di riferimento
+Pacchetto Base – Corso Completo
+Costo complessivo: 1.050€
+(Il prezzo include tutte le lezioni, le esercitazioni e l’accesso alle risorse)​
+Pacchetto Pro – Corso + Supporto Esteso
+Include tutto ciò che è previsto nel Pacchetto Base, più:
+Code review dedicate su una selezione di esercizi chiave e sul progetto finale
+Analisi approfondita delle tracce svolte a casa, con suggerimenti mirati di miglioramento
+1 sessione 1:1 extra di 45 minuti a fine corso, dedicata a revisione del progetto, portfolio/GitHub e roadmap di crescita
+Costo complessivo: 1.280€
+(Il prezzo include lezioni, review, supporto post-lezione e sessione 1:1 finale; non sono previsti costi nascosti o extra.)
