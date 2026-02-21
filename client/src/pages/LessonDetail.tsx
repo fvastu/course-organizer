@@ -1,7 +1,7 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2 } from "lucide-react";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2, GraduationCap, AlertTriangle, ClipboardCheck } from "lucide-react";
 import { Link, useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -9,6 +9,9 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { GitStructureChart } from "@/components/GitStructureChart";
 import { LESSON_ENHANCEMENTS } from "@/data/lesson-enhancements";
+import { LESSON_ACADEMY } from "@/data/lesson-academy";
+import { LessonDemoFrame } from "@/components/LessonDemoFrame";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function LessonDetail() {
   const [, params] = useRoute("/lesson/:id");
@@ -68,6 +71,7 @@ export default function LessonDetail() {
   const examples = enhancement?.examples ?? [];
   const situations = enhancement?.situations ?? [];
   const snippets = enhancement?.snippets ?? [];
+  const academy = LESSON_ACADEMY[lesson.lessonNumber];
 
   return (
     <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
@@ -123,6 +127,100 @@ export default function LessonDetail() {
 
             {/* Content Sections */}
             <div className="space-y-16">
+              {academy && (
+                <section className="space-y-8">
+                  <div className="flex items-center gap-3">
+                    <GraduationCap className="w-5 h-5 text-primary" />
+                    <h2 className="text-2xl font-bold tracking-tight">Spiegazione guidata (stile universitario)</h2>
+                  </div>
+
+                  <Card className="border-primary/25 bg-card">
+                    <CardContent className="p-6 space-y-4">
+                      <p className="text-base leading-relaxed text-foreground/90">{academy.intro}</p>
+                      <div className="rounded-xl border border-primary/20 bg-muted/40 p-4">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Contesto applicativo</p>
+                        <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
+                          {academy.context.map((item, idx) => (
+                            <li key={idx}>• {item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Accordion type="multiple" className="w-full rounded-2xl border border-primary/20 bg-card px-4">
+                    {academy.sections.map((section, idx) => (
+                      <AccordionItem key={idx} value={`section-${idx}`} className="border-primary/10">
+                        <AccordionTrigger className="text-left text-base font-semibold">
+                          {section.title}
+                        </AccordionTrigger>
+                        <AccordionContent className="space-y-4 pt-1">
+                          {section.paragraphs.map((paragraph, pIdx) => (
+                            <p key={pIdx} className="text-sm leading-relaxed text-foreground/85">
+                              {paragraph}
+                            </p>
+                          ))}
+                          <ul className="space-y-2 text-sm text-muted-foreground">
+                            {section.bullets.map((bullet, bIdx) => (
+                              <li key={bIdx}>• {bullet}</li>
+                            ))}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <Card className="border-primary/25 bg-card">
+                      <CardContent className="p-5">
+                        <div className="mb-3 flex items-center gap-2 text-primary">
+                          <AlertTriangle className="h-4 w-4" />
+                          <h3 className="text-sm font-semibold uppercase tracking-wider">Errori comuni</h3>
+                        </div>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          {academy.commonMistakes.map((mistake, idx) => (
+                            <li key={idx}>• {mistake}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-primary/25 bg-card">
+                      <CardContent className="p-5">
+                        <div className="mb-3 flex items-center gap-2 text-primary">
+                          <ClipboardCheck className="h-4 w-4" />
+                          <h3 className="text-sm font-semibold uppercase tracking-wider">Checklist finale</h3>
+                        </div>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          {academy.checklist.map((item, idx) => (
+                            <li key={idx}>• {item}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-bold tracking-tight">Snapshot visivo</h3>
+                    <div className="grid gap-4">
+                      {academy.snapshots.map((shot, idx) => (
+                        <Card key={idx} className="overflow-hidden border-primary/25 bg-card">
+                          <img src={shot.src} alt={shot.title} className="w-full border-b border-primary/15" />
+                          <CardContent className="p-4">
+                            <p className="text-sm font-semibold">{shot.title}</p>
+                            <p className="text-xs text-muted-foreground mt-1">{shot.caption}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-bold tracking-tight">Laboratorio interattivo</h3>
+                    <LessonDemoFrame demo={academy.demo} />
+                  </div>
+                </section>
+              )}
               
               {/* Objectives */}
               <section className="space-y-6">

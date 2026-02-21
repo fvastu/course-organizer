@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" fill="none">
+  <rect width="1200" height="680" rx="24" fill="#0D0D0F"/>
+  <rect x="28" y="28" width="1144" height="624" rx="20" stroke="#C49A46" stroke-opacity="0.6"/>
+  <rect x="68" y="80" width="1064" height="84" rx="14" fill="#17171C" stroke="#C49A46" stroke-opacity="0.45"/>
+  <text x="94" y="130" fill="#F5E9CB" font-size="34" font-family="Inter, Arial">Deploy Pipeline</text>
+  <text x="94" y="158" fill="#D6BD8A" font-size="18" font-family="Inter, Arial">PR preview, quality gate, produzione</text>
+  <rect x="92" y="210" width="312" height="148" rx="14" fill="#151216" stroke="#C49A46" stroke-opacity="0.4"/>
+  <rect x="444" y="210" width="312" height="148" rx="14" fill="#151216" stroke="#C49A46" stroke-opacity="0.4"/>
+  <rect x="796" y="210" width="312" height="148" rx="14" fill="#151216" stroke="#C49A46" stroke-opacity="0.4"/>
+  <rect x="92" y="390" width="1016" height="212" rx="14" fill="#131016" stroke="#C49A46" stroke-opacity="0.32"/>
+  <text x="116" y="268" fill="#E8D7AF" font-size="20" font-family="Inter, Arial">Blocco A</text>
+  <text x="468" y="268" fill="#E8D7AF" font-size="20" font-family="Inter, Arial">Blocco B</text>
+  <text x="820" y="268" fill="#E8D7AF" font-size="20" font-family="Inter, Arial">Blocco C</text>
+  <text x="116" y="442" fill="#D8C08C" font-size="18" font-family="Inter, Arial">Snapshot didattico: usa questa vista come mappa concettuale durante lo studio.</text>
+  <line x1="404" y1="284" x2="444" y2="284" stroke="#C49A46" stroke-width="3"/>
+  <line x1="756" y1="284" x2="796" y2="284" stroke="#C49A46" stroke-width="3"/>
+</svg>
