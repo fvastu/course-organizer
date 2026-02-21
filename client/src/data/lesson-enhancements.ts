@@ -38,10 +38,14 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
     examples: [
       "Componente `Hero` riusato in home e landing con props diverse.",
       "Navbar configurata da un array di link per evitare codice duplicato.",
+      "Dashboard con lista utenti: React aggiorna solo le card cambiate invece di ridisegnare tutto il DOM.",
+      "Cambio tema (light/dark): stato globale e rerender dei soli componenti coinvolti.",
     ],
     situations: [
       "UI inizialmente in un file unico: difficile da leggere e testare.",
       "Stesso bottone copiato in 5 punti con stili diversi: nasce incoerenza visiva.",
+      "Lista prodotti con key sbagliate: animazioni e stato locale dei row diventano instabili.",
+      "Pagina con troppa logica nel JSX: manutenzione lenta e bug in crescita.",
     ],
     snippets: [
       {
@@ -53,6 +57,16 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
         title: "Composizione in App",
         language: "tsx",
         code: "const page = {\n  title: \"Corso React\",\n  subtitle: \"Percorso guidato\",\n};\n\n<Hero title={page.title} subtitle={page.subtitle} />",
+      },
+      {
+        title: "Virtual DOM: update dichiarativo",
+        language: "tsx",
+        code: "function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>Valore: {count}</p>\n      <button onClick={() => setCount((c) => c + 1)}>Incrementa</button>\n    </div>\n  );\n}\n\n// React confronta il nuovo albero virtuale e aggiorna solo i nodi necessari nel DOM reale.",
+      },
+      {
+        title: "Liste con key stabili",
+        language: "tsx",
+        code: "type User = { id: string; name: string };\n\nfunction UserList({ users }: { users: User[] }) {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>{user.name}</li>\n      ))}\n    </ul>\n  );\n}",
       },
     ],
   },

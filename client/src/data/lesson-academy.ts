@@ -64,6 +64,11 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     ],
     snapshots: [
       {
+        title: "Flusso completo workspace -> staging -> repository",
+        src: "https://i.sstatic.net/qPcFI.png",
+        caption: "Schema operativo con passaggi tra area di lavoro, staging, commit locale e remoto.",
+      },
+      {
         title: "Aree di Git: working directory, staging, repository",
         src: "/snapshots/git-areas.png",
         caption: "Schema delle tre aree principali del flusso Git (fonte: git-scm.com / Pro Git).",
@@ -87,12 +92,37 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
   },
   2: {
     intro:
-      "React va studiato come modello di composizione: la UI e una funzione dello stato e delle proprieta in ingresso.",
+      "React e una libreria per costruire interfacce moderne a componenti: la UI e descritta in modo dichiarativo e aggiornata in base a stato e props.",
     context: [
-      "Scenario didattico: trasformare una pagina statica in componenti riusabili.",
-      "Scenario reale: ridurre duplicazione quando il design system cresce.",
+      "Scenario didattico: trasformare una pagina HTML monolitica in componenti riusabili e testabili.",
+      "Scenario reale: ridurre duplicazione e regressioni quando il prodotto cresce con nuove schermate.",
     ],
     sections: [
+      {
+        title: "Cos'e React e perche si usa",
+        paragraphs: [
+          "React separa la UI in componenti indipendenti, facilitando manutenzione, riuso e collaborazione in team.",
+          "Il modello dichiarativo riduce la manipolazione manuale del DOM e rende il comportamento dell'interfaccia piu prevedibile.",
+        ],
+        bullets: [
+          "Componenti riusabili",
+          "Flusso dati chiaro",
+          "Ecosistema ricco (routing, form, state management, testing)",
+        ],
+      },
+      {
+        title: "Virtual DOM e reconciliation",
+        paragraphs: [
+          "React mantiene una rappresentazione virtuale della UI in memoria (Virtual DOM).",
+          "A ogni aggiornamento confronta il nuovo albero con il precedente (diffing) e applica solo patch minime al DOM reale.",
+          "Questo approccio migliora performance percepita e riduce aggiornamenti non necessari.",
+        ],
+        bullets: [
+          "Aggiornamenti granulari",
+          "Minor costo su operazioni DOM ripetute",
+          "Importanza di key stabili nelle liste",
+        ],
+      },
       {
         title: "Component thinking",
         paragraphs: [
@@ -113,11 +143,15 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
       },
     ],
     commonMistakes: [
+      "Confondere React con un framework fullstack: React gestisce la UI, non tutto il backend",
+      "Pensare che il Virtual DOM elimini sempre ogni problema di performance senza progettazione",
       "Componenti troppo grandi e poco testabili",
       "Props non tipizzate in TypeScript",
       "Mescolare dati hardcoded in piu punti",
     ],
     checklist: [
+      "So spiegare React in 2 frasi (cosa fa e perche conviene)",
+      "So spiegare il Virtual DOM e la reconciliation con un esempio",
       "Ho separato componenti presentazionali e container",
       "Le props sono tipizzate",
       "La UI e leggibile anche senza commenti",
