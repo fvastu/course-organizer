@@ -1,6 +1,6 @@
 # Overview
 
-This is a **React Junior Course Tracker** — a full-stack web application that helps students track their progress through an 11-lesson curriculum covering Git, React, and Next.js. The app displays lessons grouped by module ("Fondamenti", "Modulo React", "Modulo Next.js"), lets users view lesson details (objectives, topics, commands, homework), and toggle completion status for each lesson. The UI is in Italian.
+This is a **React Junior Course Tracker** - a full-stack web application that helps students track their progress through an 11-lesson curriculum covering Git, React, and Next.js. The app displays lessons grouped by module ("Fondamenti", "Modulo React", "Modulo Next.js"), lets users view lesson details (objectives, topics, commands, homework), and toggle completion status for each lesson. The UI is in Italian.
 
 # User Preferences
 
@@ -18,14 +18,14 @@ Preferred communication style: Simple, everyday language.
 - **Icons:** Lucide React
 
 ### Pages
-- `/` — Dashboard: shows lesson modules with progress stats
-- `/lesson/:id` — Lesson detail: objectives, topics, commands, homework, completion toggle
-- `/curriculum` — Timeline view of all lessons
+- `/` - Dashboard: shows lesson modules with progress stats
+- `/lesson/:id` - Lesson detail: objectives, topics, commands, homework, completion toggle
+- `/curriculum` - Timeline view of all lessons
 
 ### Key Client Components
-- `Sidebar` — Navigation sidebar with links to Dashboard and Curriculum
-- `ModuleCard` — Displays a group of lessons within a module with progress
-- `CompletionToggle` — Button to mark a lesson as complete/incomplete
+- `Sidebar` - Navigation sidebar with links to Dashboard and Curriculum
+- `ModuleCard` - Displays a group of lessons within a module with progress
+- `CompletionToggle` - Button to mark a lesson as complete/incomplete
 - Custom hooks in `client/src/hooks/use-lessons.ts` handle all API communication
 
 ## Backend
@@ -36,9 +36,9 @@ Preferred communication style: Simple, everyday language.
 - **Production:** Vite builds static files to `dist/public`, esbuild bundles the server to `dist/index.cjs`
 
 ### API Endpoints
-- `GET /api/lessons` — List all lessons ordered by lesson number
-- `GET /api/lessons/:id` — Get a single lesson
-- `PATCH /api/lessons/:id` — Update a lesson (primarily used for toggling `isCompleted`)
+- `GET /api/lessons` - List all lessons ordered by lesson number
+- `GET /api/lessons/:id` - Get a single lesson
+- `PATCH /api/lessons/:id` - Update a lesson (primarily used for toggling `isCompleted`)
 
 ### API Contract
 Shared route definitions in `shared/routes.ts` define method, path, input schemas, and response schemas using Zod. Both client and server reference these for type safety.
@@ -72,9 +72,9 @@ The server auto-seeds the database with 11 predefined lessons on first run if th
 - The storage singleton (`storage`) is used by route handlers
 
 ## Build System
-- **Dev:** `npm run dev` — runs the Express server with Vite middleware for HMR
-- **Build:** `npm run build` — runs `script/build.ts` which builds the Vite client and bundles the server with esbuild
-- **Start:** `npm start` — runs the production build from `dist/index.cjs`
+- **Dev:** `npm run dev` - runs the Express server with Vite middleware for HMR
+- **Build:** `npm run build` - runs `script/build.ts` which builds the Vite client and bundles the server with esbuild
+- **Start:** `npm start` - runs the production build from `dist/index.cjs`
 - **Type check:** `npm run check`
 
 ## Path Aliases
@@ -84,7 +84,7 @@ The server auto-seeds the database with 11 predefined lessons on first run if th
 
 # External Dependencies
 
-- **PostgreSQL** — Primary database, connected via `DATABASE_URL` environment variable. Required for the app to start.
-- **connect-pg-simple** — Session store (available but sessions are not actively used in current routes)
-- **Google Fonts** — Inter, Outfit, DM Sans, Fira Code, Geist Mono loaded via CDN
-- **Replit Plugins** — `@replit/vite-plugin-runtime-error-modal`, `@replit/vite-plugin-cartographer`, `@replit/vite-plugin-dev-banner` used in development on Replit
+- **PostgreSQL** - Primary database, connected via `DATABASE_URL` environment variable. Required for the app to start.
+- **connect-pg-simple** - Session store (available but sessions are not actively used in current routes)
+- **Google Fonts** - Inter, Outfit, DM Sans, Fira Code, Geist Mono loaded via CDN
+- **Replit Plugins** - `@replit/vite-plugin-runtime-error-modal`, `@replit/vite-plugin-cartographer`, `@replit/vite-plugin-dev-banner` used in development on Replit

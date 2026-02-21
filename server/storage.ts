@@ -1,6 +1,4 @@
-import { db } from "./db";
-import { lessons, type InsertLesson, type UpdateLessonRequest, type Lesson } from "@shared/schema";
-import { eq } from "drizzle-orm";
+import { type InsertLesson, type UpdateLessonRequest, type Lesson } from "@shared/schema";
 
 export interface IStorage {
   getLessons(): Promise<Lesson[]>;
@@ -9,28 +7,39 @@ export interface IStorage {
   createLesson(lesson: InsertLesson): Promise<Lesson>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class MemStorage implements IStorage {
+  private lessons: Map<number, Lesson> = new Map();
+  private nextId = 1;
+
   async getLessons(): Promise<Lesson[]> {
-    return await db.select().from(lessons).orderBy(lessons.lessonNumber);
+    return Array.from(this.lessons.values()).sort(
+      (a, b) => a.lessonNumber - b.lessonNumber
+    );
   }
 
   async getLesson(id: number): Promise<Lesson | undefined> {
-    const [lesson] = await db.select().from(lessons).where(eq(lessons.id, id));
-    return lesson;
+    return this.lessons.get(id);
   }
 
   async updateLesson(id: number, updates: UpdateLessonRequest): Promise<Lesson | undefined> {
-    const [updated] = await db.update(lessons)
-      .set(updates)
-      .where(eq(lessons.id, id))
-      .returning();
+    const lesson = this.lessons.get(id);
+    if (!lesson) return undefined;
+    const updated = { ...lesson, ...updates };
+    this.lessons.set(id, updated);
     return updated;
   }
 
   async createLesson(lesson: InsertLesson): Promise<Lesson> {
-    const [created] = await db.insert(lessons).values(lesson).returning();
+    const created: Lesson = {
+      id: this.nextId++,
+      isCompleted: false,
+      commands: "",
+      reflectionQuestions: "",
+      ...lesson,
+    };
+    this.lessons.set(created.id, created);
     return created;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
