@@ -1,4 +1,3 @@
-import { type Application } from "express";
 import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
@@ -8,7 +7,7 @@ import { nanoid } from "nanoid";
 
 const viteLogger = createLogger();
 
-export async function setupVite(server: Server, app: Application) {
+export async function setupVite(server: Server, app: any) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server, path: "/vite-hmr" },
@@ -31,7 +30,7 @@ export async function setupVite(server: Server, app: Application) {
 
   app.use(vite.middlewares);
 
-  app.use("/{*path}", async (req, res, next) => {
+  app.use("/{*path}", async (req: any, res: any, next: any) => {
     const url = req.originalUrl;
 
     try {

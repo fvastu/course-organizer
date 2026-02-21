@@ -1,4 +1,3 @@
-import type { Application } from "express";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
@@ -16,11 +15,11 @@ async function seedDatabase() {
   }
 }
 
-export async function registerRoutes(app: Application): Promise<void> {
+export async function registerRoutes(app: any): Promise<void> {
   // Seed the in-memory database on startup
   await seedDatabase();
 
-  app.get(api.lessons.list.path, async (_req, res) => {
+  app.get(api.lessons.list.path, async (_req: any, res: any) => {
     const lessons = await storage.getLessons();
 
     if (REQUIRE_SEQUENTIAL_UNLOCK) {
@@ -38,7 +37,7 @@ export async function registerRoutes(app: Application): Promise<void> {
     res.json(lessons.map((lesson) => ({ ...lesson, isLocked: false })));
   });
 
-  app.get(api.lessons.get.path, async (req, res) => {
+  app.get(api.lessons.get.path, async (req: any, res: any) => {
     const lessonId = Number(req.params.id);
     const lesson = await storage.getLesson(lessonId);
 
@@ -63,7 +62,7 @@ export async function registerRoutes(app: Application): Promise<void> {
     res.json(lesson);
   });
 
-  app.patch(api.lessons.update.path, async (req, res) => {
+  app.patch(api.lessons.update.path, async (req: any, res: any) => {
     try {
       const input = api.lessons.update.input.parse(req.body);
       const updated = await storage.updateLesson(Number(req.params.id), input);

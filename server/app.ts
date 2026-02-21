@@ -1,4 +1,4 @@
-import express, { type Application, type NextFunction, type Request, type Response } from "express";
+import express from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 
@@ -19,12 +19,12 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function createApp(): Promise<Application> {
+export async function createApp(): Promise<any> {
   const app = express();
 
   app.use(
     express.json({
-      verify: (req: Request, _res: Response, buf: Buffer) => {
+      verify: (req: any, _res: any, buf: Buffer) => {
         req.rawBody = buf;
       },
     }),
@@ -32,7 +32,7 @@ export async function createApp(): Promise<Application> {
 
   app.use(express.urlencoded({ extended: false }));
 
-  app.use((req, res, next) => {
+  app.use((req: any, res: any, next: any) => {
     const start = Date.now();
     const path = req.path;
     let capturedJsonResponse: unknown = undefined;
@@ -60,7 +60,7 @@ export async function createApp(): Promise<Application> {
 
   await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
+  app.use((err: any, _req: any, res: any, next: any) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 

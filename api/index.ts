@@ -10,6 +10,6 @@ async function getApp() {
 }
 
 export default async function handler(req: any, res: any) {
-  const app = await getApp();
-  return app.handle(req, res);
+  const app: any = await getApp();
+  return app(req, res);
 }

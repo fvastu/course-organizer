@@ -1,8 +1,8 @@
-import express, { type Application } from "express";
+import express from "express";
 import fs from "fs";
 import path from "path";
 
-export function serveStatic(app: Application) {
+export function serveStatic(app: any) {
   const candidatePaths = [
     path.resolve(process.cwd(), "dist/public"),
     path.resolve(__dirname, "public"),
@@ -18,7 +18,7 @@ export function serveStatic(app: Application) {
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
-  app.use("/{*path}", (_req, res) => {
+  app.use("/{*path}", (_req: any, res: any) => {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
