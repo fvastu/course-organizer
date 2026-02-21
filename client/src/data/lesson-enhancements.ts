@@ -16,10 +16,12 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
     examples: [
       "Repo team: ogni task vive in `feature/*`, PR piccole e commit leggibili.",
       "Fix urgente: branch `hotfix/*` da `main`, patch rapida e merge controllato.",
+      "Release stabile: tag `v1.0.0` su commit validato e deploy automatico da pipeline CI.",
     ],
     situations: [
       "Due dev modificano lo stesso file README nello stesso punto: nasce un conflitto da risolvere consapevolmente.",
       "Un commit include piu cambiamenti scollegati: la review diventa lenta e aumenta il rischio bug.",
+      "Deploy fallito su main: serve rollback rapido usando tag precedente (es. `v0.9.4`).",
     ],
     snippets: [
       {
@@ -31,6 +33,16 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
         title: "Risoluzione conflitto base",
         language: "bash",
         code: "git pull --rebase origin main\n# risolvi i marker <<<<<<< ======= >>>>>>>\ngit add README.md\ngit rebase --continue",
+      },
+      {
+        title: "Tag di release e publish",
+        language: "bash",
+        code: "git checkout main\ngit pull --rebase origin main\ngit tag -a v1.0.0 -m \"release 1.0.0\"\ngit push origin v1.0.0\n# opzionale: pubblica tutti i tag locali\ngit push --tags",
+      },
+      {
+        title: "Deploy da tag (esempio CI)",
+        language: "bash",
+        code: "# trigger pipeline su tag v*\n# in CI:\ngit fetch --tags\ngit checkout tags/v1.0.0\nnpm ci\nnpm run build\n# deploy artefatto buildato dal tag",
       },
     ],
   },
