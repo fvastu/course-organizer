@@ -7,7 +7,7 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: Layout },
+  { href: "/", label: "Homepage", icon: Layout },
   { href: "/curriculum", label: "Programma Corso", icon: BookOpen },
 ];
 
