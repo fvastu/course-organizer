@@ -16,7 +16,6 @@ export function ThemeToggle() {
         className="border-primary/50 bg-background/60 text-foreground backdrop-blur hover:bg-primary/10"
       >
         {isDark ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
-        {isDark ? "Tema chiaro" : "Tema scuro"}
       </Button>
     </motion.div>
   );
