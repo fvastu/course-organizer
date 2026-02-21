@@ -5,7 +5,7 @@ import { api } from "@shared/routes";
 import { z } from "zod";
 
 // COSTANTE PER LA GESTIONE DELLO SBLOCCO (SEQUENZIALE)
-const REQUIRE_SEQUENTIAL_UNLOCK = true;
+const REQUIRE_SEQUENTIAL_UNLOCK = false;
 
 async function seedDatabase() {
   const existingLessons = await storage.getLessons();
