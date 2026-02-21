@@ -1,14 +1,14 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock } from "lucide-react";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2 } from "lucide-react";
 import { Link, useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { GitStructureChart } from "@/components/GitStructureChart";
+import { LESSON_ENHANCEMENTS } from "@/data/lesson-enhancements";
 
 export default function LessonDetail() {
   const [, params] = useRoute("/lesson/:id");
@@ -64,6 +64,10 @@ export default function LessonDetail() {
   const topics = lesson.topics.split('\n').filter(Boolean);
   const commands = lesson.commands ? lesson.commands.split('\n').filter(Boolean) : [];
   const reflectionQuestions = lesson.reflectionQuestions ? lesson.reflectionQuestions.split('\n').filter(Boolean) : [];
+  const enhancement = LESSON_ENHANCEMENTS[lesson.lessonNumber];
+  const examples = enhancement?.examples ?? [];
+  const situations = enhancement?.situations ?? [];
+  const snippets = enhancement?.snippets ?? [];
 
   return (
     <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
@@ -171,7 +175,7 @@ export default function LessonDetail() {
                         return (
                           <div key={i} className="group">
                             <div className="flex flex-col gap-1">
-                              <span className="text-primary-foreground/90 font-bold">$ {command}</span>
+                              <span className="text-primary font-bold">$ {command}</span>
                               {desc.length > 0 && (
                               <span className="text-muted-foreground text-xs italic"># {desc.join(' - ')}</span>
                               )}
@@ -180,6 +184,77 @@ export default function LessonDetail() {
                         );
                       })}
                     </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Examples Section */}
+              {examples.length > 0 && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                    <h2 className="text-2xl font-bold tracking-tight">Esempi pratici</h2>
+                  </div>
+                  <div className="grid gap-3">
+                    {examples.map((example, i) => (
+                      <Card key={i} className="border border-primary/20 bg-card/80">
+                        <CardContent className="p-5">
+                          <div className="mb-2 inline-flex rounded-md border border-primary/25 bg-primary/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                            Esempio {i + 1}
+                          </div>
+                          <p className="text-sm leading-relaxed text-foreground/90">{example}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Situations Section */}
+              {situations.length > 0 && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Briefcase className="w-5 h-5 text-primary" />
+                    <h2 className="text-2xl font-bold tracking-tight">Situazioni reali</h2>
+                  </div>
+                  <div className="space-y-3">
+                    {situations.map((situation, i) => (
+                      <div key={i} className="rounded-xl border border-primary/20 bg-muted/50 px-4 py-4">
+                        <p className="text-sm font-medium text-foreground/90">{situation}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Snippets Section */}
+              {snippets.length > 0 && (
+                <section className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <Code2 className="w-5 h-5 text-primary" />
+                    <h2 className="text-2xl font-bold tracking-tight">Snippet di riferimento</h2>
+                  </div>
+                  <div className="space-y-4">
+                    {snippets.map((snippet, i) => (
+                      <Card key={i} className="overflow-hidden border border-primary/25 bg-card">
+                        <CardContent className="p-0">
+                          <div className="flex items-center justify-between border-b border-primary/15 bg-muted/60 px-4 py-2">
+                            <h3 className="text-sm font-semibold text-foreground">{snippet.title}</h3>
+                            <span className="rounded-md border border-primary/20 bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                              {snippet.language}
+                            </span>
+                          </div>
+                          <pre className="overflow-x-auto px-4 py-4 text-xs leading-6 text-foreground/90">
+                            <code>{snippet.code}</code>
+                          </pre>
+                          {snippet.note && (
+                            <div className="border-t border-primary/10 bg-primary/5 px-4 py-3 text-xs text-muted-foreground">
+                              {snippet.note}
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
                 </section>
               )}
