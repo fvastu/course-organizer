@@ -43,7 +43,7 @@ export default function Dashboard() {
 
       <main className="flex-1 min-w-0">
         <div className="md:hidden px-4 py-3 border-b border-primary/30 bg-background/90 backdrop-blur">
-          <div className="flex items-center justify-between">
+          <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
             <h1 className="font-display font-bold">Corso React/Next.js</h1>
             <Link href="/curriculum" className="text-sm font-medium text-primary">
               Programma

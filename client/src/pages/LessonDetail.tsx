@@ -73,33 +73,35 @@ export default function LessonDetail() {
   const academy = LESSON_ACADEMY[lesson.lessonNumber];
 
   return (
-    <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10 max-w-5xl">
+    <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
       <Sidebar className="hidden md:flex border-r border-primary/30 bg-card" />
       
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top Navigation Bar */}
-        <header className="h-16 border-b border-primary/30 flex items-center px-4 md:px-8 bg-background/90 backdrop-blur-md sticky top-0 z-50 justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/panoramica">
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted transition-colors">
-                <ArrowLeft className="w-5 h-5" />
-              </Button>
-            </Link>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-primary/70 uppercase tracking-widest">
-                {lesson.module}
-              </span>
-              <h1 className="text-sm font-bold text-foreground truncate max-w-[150px] md:max-w-md">
-                {lesson.lessonNumber}. {lesson.title}
-              </h1>
+        <header className="h-16 border-b border-primary/30 bg-background/90 backdrop-blur-md sticky top-0 z-50">
+          <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 md:px-8">
+            <div className="flex items-center gap-4">
+              <Link href="/panoramica">
+                <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted transition-colors">
+                  <ArrowLeft className="w-5 h-5" />
+                </Button>
+              </Link>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-primary/70 uppercase tracking-widest">
+                  {lesson.module}
+                </span>
+                <h1 className="text-sm font-bold text-foreground truncate max-w-[150px] md:max-w-md">
+                  {lesson.lessonNumber}. {lesson.title}
+                </h1>
+              </div>
             </div>
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-muted border border-primary/30 rounded-full text-[10px] font-bold text-muted-foreground">
-              {lesson.isCompleted ? "COMPLETATA" : "IN CORSO"}
+
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-muted border border-primary/30 rounded-full text-[10px] font-bold text-muted-foreground">
+                {lesson.isCompleted ? "COMPLETATA" : "IN CORSO"}
+              </div>
+              <CompletionToggle lessonId={lesson.id} isCompleted={lesson.isCompleted} />
             </div>
-            <CompletionToggle lessonId={lesson.id} isCompleted={lesson.isCompleted} />
           </div>
         </header>
 
