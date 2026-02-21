@@ -1,8 +1,8 @@
-import express, { type Express } from "express";
+import express, { type Application } from "express";
 import fs from "fs";
 import path from "path";
 
-export function serveStatic(app: Express) {
+export function serveStatic(app: Application) {
   const candidatePaths = [
     path.resolve(process.cwd(), "dist/public"),
     path.resolve(__dirname, "public"),

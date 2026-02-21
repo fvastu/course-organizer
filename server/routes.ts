@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Application } from "express";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
@@ -16,7 +16,7 @@ async function seedDatabase() {
   }
 }
 
-export async function registerRoutes(app: Express): Promise<void> {
+export async function registerRoutes(app: Application): Promise<void> {
   // Seed the in-memory database on startup
   await seedDatabase();
 

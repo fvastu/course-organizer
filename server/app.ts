@@ -1,4 +1,4 @@
-import express, { type Express, type NextFunction, type Request, type Response } from "express";
+import express, { type Application, type NextFunction, type Request, type Response } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 
@@ -19,12 +19,12 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-export async function createApp(): Promise<Express> {
+export async function createApp(): Promise<Application> {
   const app = express();
 
   app.use(
     express.json({
-      verify: (req, _res, buf) => {
+      verify: (req: Request, _res: Response, buf: Buffer) => {
         req.rawBody = buf;
       },
     }),
@@ -35,13 +35,13 @@ export async function createApp(): Promise<Express> {
   app.use((req, res, next) => {
     const start = Date.now();
     const path = req.path;
-    let capturedJsonResponse: Record<string, any> | undefined = undefined;
+    let capturedJsonResponse: unknown = undefined;
 
-    const originalResJson = res.json;
-    res.json = function (bodyJson, ...args) {
+    const originalResJson = res.json.bind(res);
+    res.json = ((bodyJson: unknown, ...args: unknown[]) => {
       capturedJsonResponse = bodyJson;
-      return originalResJson.apply(res, [bodyJson, ...args]);
-    };
+      return (originalResJson as any).apply(res, [bodyJson, ...args]);
+    }) as any;
 
     res.on("finish", () => {
       const duration = Date.now() - start;
