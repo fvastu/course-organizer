@@ -62,10 +62,6 @@ export default function Dashboard() {
               transition={{ duration: 0.45 }}
               className="relative z-10 max-w-3xl space-y-6"
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                Panoramica del percorso
-              </div>
 
               <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">
                 Traccia il tuo
@@ -75,21 +71,6 @@ export default function Dashboard() {
               <p className="text-muted-foreground text-base md:text-lg max-w-2xl">
                 Segui lo stato reale delle lezioni, riprendi subito dal punto giusto e completa il programma senza dispersioni.
               </p>
-
-              <div className="space-y-2 max-w-lg">
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <span>Avanzamento</span>
-                  <span className="font-bold text-foreground">{progress}%</span>
-                </div>
-                <div className="h-3 rounded-full bg-muted overflow-hidden">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-primary/70 via-primary to-primary/60"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  />
-                </div>
-              </div>
             </motion.div>
           </section>
 
