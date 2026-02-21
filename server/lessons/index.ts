@@ -1,4 +1,4 @@
-import type { InsertLesson } from "@shared/schema";
+import type { InsertLesson } from "../../shared/schema.ts";
 import { lesson01 } from "./lesson-01";
 import { lesson02 } from "./lesson-02";
 import { lesson03 } from "./lesson-03";

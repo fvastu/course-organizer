@@ -1,4 +1,4 @@
-import { type InsertLesson, type UpdateLessonRequest, type Lesson } from "@shared/schema";
+import { type InsertLesson, type UpdateLessonRequest, type Lesson } from "../shared/schema.ts";
 
 export interface IStorage {
   getLessons(): Promise<Lesson[]>;

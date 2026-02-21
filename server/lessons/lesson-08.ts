@@ -1,4 +1,4 @@
-import type { InsertLesson } from "@shared/schema";
+import type { InsertLesson } from "../../shared/schema.ts";
 
 export const lesson08: InsertLesson = {
   lessonNumber: 8,
