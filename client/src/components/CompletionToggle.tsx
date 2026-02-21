@@ -48,7 +48,7 @@ export function CompletionToggle({ lessonId, isCompleted, className }: Completio
       className={cn(
         "gap-2 transition-all duration-300 font-semibold shadow-sm hover:shadow-md active:scale-95",
         isCompleted 
-          ? "bg-green-600 hover:bg-green-700 text-white border-transparent" 
+          ? "bg-[#d6a84f] hover:bg-[#e5bb6a] text-[#151109] border-[#d6a84f]" 
           : "hover:border-primary hover:text-primary",
         className
       )}

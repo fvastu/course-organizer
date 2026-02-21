@@ -35,7 +35,7 @@ export function ModuleCard({ title, lessons, color }: ModuleCardProps) {
               className={cn(
                 "group relative overflow-hidden bg-card border rounded-xl p-4 transition-all duration-300 flex items-center gap-4",
                 lesson.isLocked ? "opacity-60 bg-muted/30 grayscale-[0.5]" : "hover:shadow-lg cursor-pointer",
-                lesson.isCompleted ? "border-primary/20 bg-primary/5" : "border-border hover:border-primary/30"
+                lesson.isCompleted ? "border-primary/40 bg-primary/10" : "border-border hover:border-primary/50"
               )}
             >
               <div className="flex-shrink-0">
@@ -44,7 +44,7 @@ export function ModuleCard({ title, lessons, color }: ModuleCardProps) {
                    lesson.isLocked 
                     ? "bg-muted text-muted-foreground"
                     : lesson.isCompleted 
-                      ? "bg-green-500 text-white" 
+                      ? "bg-[#d6a84f] text-[#17120a]" 
                       : "bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary"
                  )}>
                    {lesson.isLocked ? <Lock className="w-4 h-4" /> : lesson.isCompleted ? <CheckCircle2 className="w-5 h-5" /> : lesson.lessonNumber}

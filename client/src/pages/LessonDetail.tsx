@@ -66,13 +66,13 @@ export default function LessonDetail() {
 
   return (
     <div className="flex min-h-screen bg-background font-sans selection:bg-primary/10">
-      <Sidebar className="hidden md:flex border-r bg-muted/30" />
+      <Sidebar className="hidden md:flex border-r border-[#8c6a2e] bg-[#101014]" />
       
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top Navigation Bar */}
-        <header className="h-16 border-b flex items-center px-4 md:px-8 bg-background/80 backdrop-blur-md sticky top-0 z-50 justify-between">
+        <header className="h-16 border-b border-[#8c6a2e] flex items-center px-4 md:px-8 bg-[#0f0f12]/90 backdrop-blur-md sticky top-0 z-50 justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/">
+            <Link href="/panoramica">
               <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted transition-colors">
                 <ArrowLeft className="w-5 h-5" />
               </Button>
@@ -88,7 +88,7 @@ export default function LessonDetail() {
           </div>
           
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-muted rounded-full text-[10px] font-bold text-muted-foreground">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#1a1711] border border-[#8c6a2e] rounded-full text-[10px] font-bold text-[#cab889]">
               {lesson.isCompleted ? "COMPLETATA" : "IN CORSO"}
             </div>
             <CompletionToggle lessonId={lesson.id} isCompleted={lesson.isCompleted} />
@@ -160,7 +160,7 @@ export default function LessonDetail() {
                     <Terminal className="w-5 h-5 text-primary" />
                     <h2 className="text-2xl font-bold tracking-tight">Strumenti e Comandi</h2>
                   </div>
-                  <div className="rounded-2xl border bg-zinc-950 p-6 font-mono text-sm overflow-hidden relative">
+                  <div className="rounded-2xl border border-[#8c6a2e] bg-[#0a0a0c] p-6 font-mono text-sm overflow-hidden relative">
                     <div className="absolute top-0 right-0 p-4 opacity-10">
                       <Terminal className="w-20 h-20 text-white" />
                     </div>
@@ -187,12 +187,12 @@ export default function LessonDetail() {
               {reflectionQuestions.length > 0 && (
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
-                    <Lightbulb className="w-5 h-5 text-yellow-500" />
+                    <Lightbulb className="w-5 h-5 text-[#d6a84f]" />
                     <h2 className="text-2xl font-bold tracking-tight">Spunti di riflessione</h2>
                   </div>
                   <div className="grid gap-4">
                     {reflectionQuestions.map((q, i) => (
-                      <Card key={i} className="border-none bg-yellow-50/50 dark:bg-yellow-900/10 hover:bg-yellow-50 dark:hover:bg-yellow-900/20 transition-colors">
+                      <Card key={i} className="border border-[#8c6a2e] bg-[#141216] hover:bg-[#1b1711] transition-colors">
                         <CardContent className="p-6">
                           <p className="text-foreground/80 italic">"{q}"</p>
                         </CardContent>
