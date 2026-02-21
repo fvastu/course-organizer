@@ -3,6 +3,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { Loader2, BookOpen, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export default function Curriculum() {
   const { data: lessons, isLoading } = useLessons();
@@ -30,7 +31,14 @@ export default function Curriculum() {
 
           <div className="relative border-l-2 border-[#8c6a2e] ml-4 md:ml-8 space-y-12">
             {allLessons.map((lesson, idx) => (
-              <div key={lesson.id} className="relative pl-8 md:pl-12">
+              <motion.div
+                key={lesson.id}
+                className="relative pl-8 md:pl-12"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: idx * 0.03 }}
+              >
                 {/* Timeline Dot */}
                 <div className={cn(
                   "absolute -left-[9px] top-1 w-4 h-4 rounded-full border-2 transition-colors duration-300",
@@ -42,7 +50,7 @@ export default function Curriculum() {
                 </div>
 
                 <Link href={`/lesson/${lesson.id}`}>
-                  <div className="group cursor-pointer">
+                  <motion.div className="group cursor-pointer" whileHover={{ x: 2 }}>
                     <div className="flex items-center gap-3 mb-2">
                        <span className="text-xs font-bold uppercase tracking-wider text-[#cab889] bg-[#1a1711] px-2 py-0.5 rounded border border-[#8c6a2e]">
                          {lesson.module}
@@ -61,9 +69,9 @@ export default function Curriculum() {
                     <div className="inline-flex items-center text-sm font-medium text-primary hover:underline">
                       Vedi dettagli <BookOpen className="ml-2 w-4 h-4" />
                     </div>
-                  </div>
+                  </motion.div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
 

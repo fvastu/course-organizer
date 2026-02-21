@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { GitStructureChart } from "@/components/GitStructureChart";
 
 export default function LessonDetail() {
   const [, params] = useRoute("/lesson/:id");
@@ -65,7 +66,7 @@ export default function LessonDetail() {
   const reflectionQuestions = lesson.reflectionQuestions ? lesson.reflectionQuestions.split('\n').filter(Boolean) : [];
 
   return (
-    <div className="flex min-h-screen bg-background font-sans selection:bg-primary/10">
+    <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
       <Sidebar className="hidden md:flex border-r border-[#8c6a2e] bg-[#101014]" />
       
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
@@ -233,6 +234,13 @@ export default function LessonDetail() {
                   </div>
                 </div>
               </section>
+
+              {lesson.lessonNumber === 1 && (
+                <section className="space-y-6">
+                  <h2 className="text-2xl font-bold tracking-tight">Visualizzazione struttura Git</h2>
+                  <GitStructureChart />
+                </section>
+              )}
 
             </div>
           </article>
