@@ -15,111 +15,111 @@ async function seedDatabase() {
         lessonNumber: 1,
         title: "Git & GitHub Fundamentals",
         module: "Fondamenti",
-        objectives: "Comprendere i concetti base del versionamento con Git.\nUtilizzare GitHub per la collaborazione e revisione del codice.\nApprendere un workflow professionale tramite branch feature e PR.",
-        topics: "1. Cos'è Git: controllo di versione distribuito.\n2. Configurazione iniziale: git config --global user.name/email.\n3. Ciclo di vita dei file: untracked, modified, staged, committed.\n4. Branching strategy: main branch e feature branches.\n5. Remote repository: clonazione, push e pull.\n6. Pull Request (PR): processo di revisione e merge.\n7. Gestione dei conflitti: risoluzione manuale.",
-        commands: "git init - Inizializza un repository\ngit clone <url> - Clona un repository remoto\ngit status - Mostra lo stato dei file\ngit add . - Aggiunge i file all'area di stage\ngit commit -m 'messaggio' - Crea un commit\ngit branch <nome> - Crea un nuovo branch\ngit checkout <nome> - Cambia branch\ngit push origin <branch> - Invia i cambiamenti al server\ngit pull origin <branch> - Scarica i cambiamenti dal server",
-        reflectionQuestions: "Perché è meglio lavorare su branch separati invece che tutti sul main?\nQual è la differenza tra 'git add' e 'git commit'?\nIn che modo una Pull Request aiuta a mantenere alta la qualità del codice?",
-        homework: "1. Crea un repository personale su GitHub.\n2. Clona il repository in locale.\n3. Crea un branch chiamato 'feature-bio'.\n4. Aggiungi un file bio.txt con una breve descrizione.\n5. Fai commit e push sul branch remoto.\n6. Apri una Pull Request su GitHub e fai il merge."
+        objectives: "• Comprendere i concetti base del versionamento con Git.\n• Utilizzare GitHub per la collaborazione e revisione del codice.\n• Apprendere un workflow professionale tramite branch feature e PR.",
+        topics: "1. **Cos'è Git**: Controllo di versione distribuito e perché è vitale per un developer.\n2. **Configurazione iniziale**: Impostare `user.name` e `user.email` globalmente.\n3. **Il ciclo di vita dei file**: Comprendere la differenza tra file untracked, modified, staged e committed.\n4. **Branching Strategy**: Perché non lavoriamo mai direttamente sul branch `main`.\n5. **Remote Repository**: Collegare il lavoro locale a GitHub (push/pull/fetch).\n6. **Pull Request (PR)**: Il cuore della collaborazione moderna e della code review.\n7. **Merge & Conflict**: Cosa succede quando due persone toccano la stessa riga di codice.",
+        commands: "git init - Inizializza un nuovo repository locale\ngit clone <url> - Scarica un repository esistente da remoto\ngit status - Controlla lo stato dei file (staged vs unstaged)\ngit add <file> - Sposta i cambiamenti nell'area di stage\ngit commit -m 'messaggio' - Salva uno snapshot dei cambiamenti\ngit branch <nome> - Crea un nuovo ramo di sviluppo\ngit checkout -b <nome> - Crea e passa istantaneamente a un nuovo branch\ngit push origin <branch> - Invia i commit locali al server remoto\ngit pull origin <branch> - Scarica e unisce i cambiamenti remoti nel locale",
+        reflectionQuestions: "Perché è fondamentale usare i branch per ogni nuova funzionalità?\nQual è il vantaggio di avere una cronologia dei commit chiara e descrittiva?\nCome cambierebbe il tuo modo di lavorare se non potessi usare Git?",
+        homework: "1. **Setup**: Crea un account GitHub se non lo hai e configura Git sul tuo PC.\n2. **Repo**: Crea un repository pubblico chiamato 'esercitazione-git'.\n3. **Feature**: Crea un branch 'add-readme', aggiungi un file README.md con una breve descrizione del corso.\n4. **PR**: Fai il push del branch, apri una Pull Request su GitHub e uniscila (merge) al main.\n5. **Sync**: Torna sul branch main in locale e fai 'git pull' per sincronizzarti."
       },
       {
         lessonNumber: 2,
         title: "React Basics",
         module: "Modulo React",
-        objectives: "Comprendere l'architettura a componenti di React.\nUtilizzare JSX e props per la composizione dell'interfaccia.\nConfigurare l'ambiente di sviluppo con Vite.",
-        topics: "1. Introduzione a React: libreria vs framework.\n2. Componenti: function components e arrow functions.\n3. JSX: JavaScript XML e regole di sintassi.\n4. Props: passaggio di dati tra componenti (top-down).\n5. Composizione: annidamento di componenti.\n6. Vite: creazione di un progetto React moderno.",
-        commands: "npm create vite@latest - Crea un nuovo progetto\nnpm install - Installa le dipendenze\nnpm run dev - Avvia il server di sviluppo",
-        reflectionQuestions: "Perché React usa JSX invece del semplice HTML?\nCosa succede se provi a modificare una prop direttamente dentro un componente?\nQuali sono i vantaggi di dividere l'interfaccia in piccoli componenti atomici?",
-        homework: "1. Crea un progetto con Vite.\n2. Sviluppa un componente 'Header'.\n3. Crea un componente 'TaskList' che riceve un array di task via props.\n4. Crea un componente 'TaskItem' per visualizzare il singolo task."
+        objectives: "• Comprendere l'architettura a componenti (LEGO style).\n• Utilizzare JSX per scrivere interfacce dichiarative.\n• Padroneggiare il passaggio di dati tramite Props.",
+        topics: "1. **Libreria vs Framework**: Perché React è una libreria e cosa comporta.\n2. **Componenti**: Funzioni che ritornano UI. Pensare a componenti atomici.\n3. **JSX**: Regole d'oro (un solo elemento radice, camelCase per attributi).\n4. **Props**: L'unico modo per far parlare i componenti tra loro (flusso unidirezionale).\n5. **Vite**: Perché lo preferiamo a Create React App per velocità e modernità.",
+        commands: "npm create vite@latest - Comando rapido per iniziare un progetto\nnpm install - Installa tutto ciò che serve per far girare l'app\nnpm run dev - Accende il motore di sviluppo con Hot Module Replacement",
+        reflectionQuestions: "Cosa rende un componente 'riutilizzabile' secondo te?\nPerché React impedisce ai componenti figli di modificare le props dei padri?\nIn che modo JSX rende più semplice la vita rispetto a document.createElement?",
+        homework: "1. **Progetto**: Inizializza una nuova app con Vite chiamata 'task-manager'.\n2. **Componenti**: Crea una cartella 'components' e scrivi i file Header.jsx, TaskList.jsx e TaskItem.jsx.\n3. **Props**: Passa una stringa 'titolo' all'Header e un oggetto 'task' al TaskItem tramite props mock.\n4. **Styling**: Applica delle classi CSS base per distinguere i componenti visivamente."
       },
       {
         lessonNumber: 3,
         title: "Stato e interazioni",
         module: "Modulo React",
-        objectives: "Comprendere il concetto di stato (state) e reattività.\nGestire input e form controllati.\nUtilizzare gli eventi di React.",
-        topics: "1. Hook useState: inizializzazione e aggiornamento.\n2. Reattività: come React ri-renderizza i componenti.\n3. Event Handling: onClick, onChange, onSubmit.\n4. Form controllati: legare l'input allo stato.\n5. Validazione base: gestire messaggi d'errore.",
-        commands: "import { useState } from 'react';\nconst [value, setValue] = useState(initial);",
-        reflectionQuestions: "Perché non possiamo usare una semplice variabile let per aggiornare la UI in React?\nQual è la differenza tra un componente controllato e uno non controllato?\nQuando dovresti decidere di spostare lo stato da un componente figlio a uno padre?",
-        homework: "1. Aggiungi uno stato per gestire il testo di un nuovo task.\n2. Crea un form per aggiungere task alla lista.\n3. Implementa una validazione: non permettere task vuoti.\n4. Visualizza un messaggio di successo dopo l'aggiunta."
+        objectives: "• Comprendere il concetto di 'Stato' come memoria del componente.\n• Gestire i form in modo 'controllato'.\n• Intercettare e gestire eventi utente.",
+        topics: "1. **useState Hook**: Dichiarare variabili che, se cambiate, aggiornano la UI.\n2. **Immutabilità**: Perché non facciamo mai `state = 'nuovo'` ma usiamo `setState`.\n3. **Eventi**: onClick, onChange e l'oggetto `event`.\n4. **Controlled Components**: Il 'Single Source of Truth' negli input dei form.\n5. **Validazione**: Gestire stati di errore visivi durante l'inserimento dati.",
+        commands: "const [data, setData] = useState(init) - Definizione dello stato\ne.preventDefault() - Impedisce il refresh della pagina all'invio del form\ne.target.value - Recupera il valore digitato in un input",
+        reflectionQuestions: "Qual è la differenza tra una variabile locale e uno stato di React?\nPerché è importante l'immutabilità quando aggiorniamo un array nello stato?\nCosa succede all'interfaccia se chiami setState dentro il corpo del componente (loop)?",
+        homework: "1. **Form**: Nel tuo Task Manager, aggiungi un input di testo e un bottone 'Aggiungi'.\n2. **State**: Crea uno stato per catturare ciò che l'utente scrive.\n3. **Interazione**: Al click del bottone, stampa in console il valore dello stato.\n4. **Bonus**: Pulisci l'input dopo l'invio e impedisci l'invio se il testo è più corto di 3 caratteri."
       },
       {
         lessonNumber: 4,
         title: "Rendering dinamico",
         module: "Modulo React",
-        objectives: "Visualizzare liste di elementi dinamicamente.\nGestire il rendering condizionale.\nComprendere l'importanza della prop 'key'.",
-        topics: "1. Metodo .map(): trasformare array in elementi JSX.\n2. Prop key: perché React ne ha bisogno per le performance.\n3. Rendering condizionale: operatori && e ternari.\n4. Empty states: cosa mostrare quando la lista è vuota.\n5. Pattern per la rimozione di elementi dallo stato.",
-        commands: "{items.map(item => <Component key={item.id} />)}\n{isVisible && <Content />}\n{isLoggedIn ? <Logout /> : <Login />}",
-        reflectionQuestions: "Cosa succede se dimentichi di inserire la prop 'key' in una lista?\nQuale operatore preferisci per il rendering condizionale e perché?\nCome influisce il rendering di liste molto lunghe sulle performance dell'app?",
-        homework: "1. Implementa la cancellazione di un task tramite un bottone 'Rimuovi'.\n2. Mostra un messaggio 'Nessun task presente' quando la lista è vuota.\n3. Aggiungi un contatore dei task totali."
+        objectives: "• Generare interfacce basate su liste di dati.\n• Implementare logica condizionale complessa nella UI.\n• Risolvere bug legati alle 'key' mancanti.",
+        topics: "1. **Array.map()**: Trasformare dati grezzi in elementi visivi in modo elegante.\n2. **La Prop Key**: Perché è l'identità del componente per React.\n3. **Short-circuit (&&)**: Visualizzare elementi solo se una condizione è vera.\n4. **Operatore Ternario**: Gestire switch tra due stati visivi (es. caricamento/dati).\n5. **Delete Pattern**: Filtrare l'array di stato per rimuovere elementi per ID.",
+        commands: "list.map(item => <Item key={item.id} />) - Rendering di liste\n{loading && <Spinner />} - Rendering condizionale rapido\n{items.length > 0 ? <List /> : <Empty />} - Rendering condizionale con fallback",
+        reflectionQuestions: "Perché usare l'indice dell'array come 'key' è considerato una cattiva pratica?\nIn quali casi preferiresti un && rispetto a un operatore ternario?\nCome gestisci l'esperienza utente (UX) quando non ci sono dati da mostrare?",
+        homework: "1. **Lista**: Crea uno stato 'tasks' (array di oggetti) e mostralo usando .map().\n2. **Delete**: Aggiungi un'icona cestino a ogni task. Al click, rimuovi quel task dallo stato.\n3. **Empty State**: Se l'array è vuoto, mostra un messaggio illustrato o un testo 'Tutto fatto!'.\n4. **ID**: Usa `crypto.randomUUID()` o un contatore per dare ID univoci ai nuovi task."
       },
       {
         lessonNumber: 5,
         title: "Stato avanzato e composizione",
         module: "Modulo React",
-        objectives: "Gestire lo stato condiviso tra componenti (Lifting State Up).\nImplementare logica di filtraggio e ricerca.\nEvitare il Prop Drilling tramite la composizione.",
-        topics: "1. Lifting State Up: spostare lo stato al parent comune.\n2. Filtraggio dati: usare .filter() basato su input di ricerca.\n3. Stato derivato: calcolare valori basati sullo stato esistente.\n4. Component Composition: passare componenti come figli.\n5. Gestione di stati complessi (oggetti/array).",
-        commands: "const filtered = items.filter(item => item.text.includes(search));",
-        reflectionQuestions: "Cos'è il Prop Drilling e perché può diventare un problema?\nIn che modo la composizione dei componenti aiuta a mantenere il codice pulito?\nQuando lo stato derivato è preferibile rispetto a un nuovo stato con useState?",
-        homework: "1. Sposta lo stato dei task nel componente App.\n2. Aggiungi una barra di ricerca per filtrare i task per testo.\n3. Aggiungi filtri per stato: 'Tutti', 'Completati', 'Da completare'."
+        objectives: "• Condividere logica tra componenti distanti.\n• Implementare sistemi di ricerca e filtri in tempo reale.\n• Ottimizzare la struttura dei componenti per evitare confusione.",
+        topics: "1. **Lifting State Up**: Quando due componenti hanno bisogno dello stesso dato.\n2. **Filtri dinamici**: Creare stati per i criteri di ricerca (search query, categoria).\n3. **Stato Derivato**: Perché non serve un nuovo `useState` per i risultati filtrati.\n4. **Prop Drilling**: Come riconoscerlo e come la composizione può risolverlo.\n5. **Composizione**: Usare la prop `children` per creare wrapper flessibili.",
+        commands: "const visibleTasks = tasks.filter(t => t.text.includes(query)) - Calcolo derivato\n<Wrapper>{children}</Wrapper> - Esempio di composizione",
+        reflectionQuestions: "Qual è il segnale che ti indica che devi 'alzare' lo stato al padre?\nPerché calcolare i dati filtrati durante il render è meglio che salvarli in un secondo stato?\nCome immagini di organizzare un'app con centinaia di componenti senza impazzire?",
+        homework: "1. **Search**: Aggiungi un input di ricerca sopra la lista.\n2. **Filter**: Implementa dei bottoni (Pillole) per filtrare tra 'Tutti', 'Aperti', 'Completati'.\n3. **Stats**: Mostra una stringa dinamica: 'Stai visualizzando X task su Y totali'.\n4. **Toggle**: Permetti di segnare un task come completato cliccando sul testo."
       },
       {
         lessonNumber: 6,
         title: "Side Effects e persistenza dati",
         module: "Modulo React",
-        objectives: "Comprendere l'esecuzione di effetti collaterali con useEffect.\nPersistere i dati nel browser tramite localStorage.\nGestire il ciclo di vita dei componenti.",
-        topics: "1. Hook useEffect: quando e perché usarlo.\n2. Dependency Array: controllare quando l'effetto viene eseguito.\n3. LocalStorage: salvataggio (setItem) e recupero (getItem).\n4. Cleanup function: evitare memory leaks.\n5. Sincronizzazione stato-storage.",
-        commands: "useEffect(() => { ... }, [deps]);\nlocalStorage.setItem('key', JSON.stringify(data));\nJSON.parse(localStorage.getItem('key'));",
-        reflectionQuestions: "Cosa succede se ometti il dependency array in useEffect?\nPerché è importante pulire gli effetti (cleanup) come i timer o le sottoscrizioni?\nQuali sono i limiti di localStorage in termini di spazio e sicurezza?",
-        homework: "1. Carica i task da localStorage all'avvio dell'app.\n2. Salva i task su localStorage ogni volta che lo stato cambia.\n3. Aggiungi un pulsante per 'Svuota tutto' che pulisce anche lo storage."
+        objectives: "• Gestire operazioni 'fuori dal controllo' di React.\n• Rendere l'applicazione persistente al refresh della pagina.\n• Sincronizzare lo stato con le API del browser.",
+        topics: "1. **useEffect**: Il coltellino svizzero per fetch, timer e storage.\n2. **Array di dipendenze**: Capire quando l'effetto deve 'scattare' (mount, update, unmount).\n3. **LocalStorage**: La memoria a lungo termine del browser.\n4. **Parsing JSON**: Trasformare oggetti in stringhe e viceversa per lo storage.\n5. **Ciclo di vita**: Cosa succede quando un componente 'muore' (Cleanup function).",
+        commands: "useEffect(() => { ... }, []) - Esegue il codice solo all'avvio\nlocalStorage.getItem('tasks') - Recupera i dati salvati\nlocalStorage.setItem('tasks', JSON.stringify(val)) - Salva i dati",
+        reflectionQuestions: "Cosa accadrebbe se facessi una fetch dentro useEffect senza array di dipendenze?\nIn che modo localStorage migliora la User Experience?\nPerché dobbiamo trasformare i nostri array in stringhe prima di salvarli?",
+        homework: "1. **Persistenza**: Salva l'array dei task su localStorage ogni volta che cambia.\n2. **Init**: Al caricamento dell'app, controlla se ci sono task salvati e impostali come stato iniziale.\n3. **Cleanup**: Aggiungi un `console.log` che avvisa quando un TaskItem viene rimosso dal DOM.\n4. **Final Check**: Assicurati che l'app funzioni anche dopo aver ricaricato la pagina (F5)."
       },
       {
         lessonNumber: 7,
         title: "Fondamenti di Next.js",
         module: "Modulo Next.js",
-        objectives: "Comprendere l'architettura di Next.js (App Router).\nDifferenziare tra Server e Client Components.\nGestire il routing basato su file system.",
-        topics: "1. App Router: la cartella app e la struttura dei file.\n2. Routing: page.tsx, layout.tsx, loading.tsx.\n3. Server Components: default in Next.js, performance e SEO.\n4. Client Components: quando usare 'use client'.\n5. Metadata API: gestire title e meta tag.",
-        commands: "npx create-next-app@latest\n'use client'; // Direttiva per componenti client",
-        reflectionQuestions: "Qual è il vantaggio principale dei Server Components rispetto al rendering tradizionale di React?\nIn che modo il file-system routing semplifica la gestione delle rotte?\nQuando è assolutamente necessario trasformare un componente in Client Component?",
-        homework: "1. Crea un nuovo progetto Next.js.\n2. Crea una pagina 'About' (/about).\n3. Implementa un layout condiviso con Navbar e Footer.\n4. Personalizza i metadata per la home page."
+        objectives: "• Comprendere il passaggio da SPA a Multi-Page Application.\n• Padroneggiare l'App Router e la gerarchia dei file.\n• Scegliere saggiamente tra Server e Client Components.",
+        topics: "1. **App Router**: La rivoluzione della cartella `app/`.\n2. **File Speciali**: page.tsx (UI), layout.tsx (struttura), loading.tsx (skeleton).\n3. **Server Components**: Perché il 90% del tuo codice dovrebbe girare sul server.\n4. **Client Components**: Quando serve interattività (eventi, state, hooks).\n5. **SEO Out-of-the-box**: Gestire i Metadata in modo dichiarativo.",
+        commands: "npx create-next-app@latest - Lo scaffold ufficiale\n'use client' - La direttiva magica per abilitare gli hook",
+        reflectionQuestions: "Qual è il limite principale di una SPA tradizionale per la SEO?\nPerché i Server Components riducono drasticamente la dimensione del bundle JS inviato al client?\nCome cambia il tuo modo di pensare se il codice gira prima sul server?",
+        homework: "1. **Setup**: Crea un nuovo progetto Next.js chiamato 'my-content-hub'.\n2. **Pagine**: Crea le rotte `/about`, `/contact` e `/blog` usando le cartelle.\n3. **Layout**: Crea un layout principale con una testata scura e un footer.\n4. **Metadata**: Aggiungi titoli e descrizioni uniche per ogni pagina."
       },
       {
         lessonNumber: 8,
         title: "Routing dinamico e Data Fetching",
         module: "Modulo Next.js",
-        objectives: "Gestire rotte dinamiche tramite parametri nell'URL.\nImplementare il data fetching asincrono nei Server Components.\nUtilizzare fetch() con caching e revalidation.",
-        topics: "1. Dynamic Routes: segmenti [slug] o [id].\n2. params e searchParams: recuperare dati dall'URL.\n3. Data Fetching asincrono: async components.\n4. generateStaticParams: pre-rendering di rotte dinamiche.\n5. Loading UI e Suspense.",
-        commands: "export default async function Page({ params }) { ... }",
-        reflectionQuestions: "Perché Next.js incoraggia il fetching dei dati direttamente nei Server Components?\nQual è la differenza tra pre-renderizzare una rotta e caricarla on-demand?\nCome gestisci gli errori di caricamento dati per non bloccare l'intera interfaccia?",
-        homework: "1. Crea una rotta dinamica per i dettagli di un post (/blog/[id]).\n2. Effettua una fetch a un'API esterna (es. JSONPlaceholder) per mostrare i dati.\n3. Implementa una pagina di caricamento personalizzata con loading.tsx."
+        objectives: "• Creare migliaia di pagine con un solo file.\n• Recuperare dati dal server con zero sforzo (async/await).\n• Gestire stati di caricamento eleganti con Suspense.",
+        topics: "1. **Dynamic Segments**: Usare le parentesi quadre `[slug]` o `[id]`.\n2. **Params**: Come leggere i dati dall'URL dentro il componente.\n3. **Server-side Fetching**: Dimentica `useEffect` e `loading states`, usa `await fetch()`.\n4. **Caching**: Capire come Next.js memorizza le risposte delle API.\n5. **generateStaticParams**: Generare pagine statiche velocissime al build time.",
+        commands: "export default async function Page({ params }) { ... } - Firma di una pagina dinamica",
+        reflectionQuestions: "Perché è meglio fare fetch sul server rispetto al client per la sicurezza (API Keys)?\nIn che modo `loading.tsx` migliora la percezione di velocità dell'app?\nQual è la differenza tra un parametro di rotta (`/post/1`) e una query string (`/search?q=react`)?",
+        homework: "1. **Blog Dinamico**: Crea la rotta `blog/[id]`. Mostra l'ID nell'interfaccia.\n2. **Fetch**: Usa `JSONPlaceholder` per recuperare un post specifico tramite l'ID dell'URL.\n3. **Async**: Trasforma il componente in `async` e usa `await` per i dati.\n4. **Fallback**: Crea un file `not-found.tsx` per gestire ID inesistenti."
       },
       {
         lessonNumber: 9,
         title: "API Routes e form submission",
         module: "Modulo Next.js",
-        objectives: "Creare endpoint API all'interno di Next.js.\nGestire invii di form con Server Actions o API.\nComprendere la gestione del body delle richieste.",
-        topics: "1. Route Handlers: creare file route.ts per API GET/POST.\n2. Request e Response: gestire header e JSON.\n3. Server Actions: gestire form senza endpoint API (opzionale).\n4. Validazione server-side dei dati ricevuti.\n5. Gestione degli errori API.",
-        commands: "export async function POST(request: Request) { ... }",
-        reflectionQuestions: "Quali sono i vantaggi di avere le API nello stesso progetto del frontend?\nIn che modo le Server Actions cambiano il modo in cui gestiamo i form?\nPerché la validazione lato server è cruciale anche se l'abbiamo già fatta lato client?",
-        homework: "1. Crea un'API Route per ricevere i dati di un contatto.\n2. Crea un form che invia i dati a questa API tramite fetch.\n3. Mostra un messaggio di conferma o errore basato sulla risposta del server."
+        objectives: "• Costruire il proprio backend dentro Next.js.\n• Gestire l'invio di dati complessi dal frontend al server.\n• Validare i dati con criteri di sicurezza.",
+        topics: "1. **Route Handlers**: Creare endpoint `GET`, `POST`, `DELETE` in file `route.ts`.\n2. **Request Body**: Leggere JSON inviati dal client.\n3. **Server Actions**: La nuova via per gestire i form senza API esterne.\n4. **Status Codes**: Rispondere con 201 (Created), 400 (Bad Request), 500 (Error).\n5. **Zod Integration**: Validare che i dati siano nel formato corretto.",
+        commands: "export async function POST(req: Request) { ... } - Definizione di un endpoint POST",
+        reflectionQuestions: "Perché preferiresti una Server Action rispetto a una classica API Route?\nIn che modo il server protegge il tuo database dagli attacchi malevoli?\nCosa succede se il client invia dati nel formato sbagliato? Come risponde la tua API?",
+        homework: "1. **API**: Crea un endpoint `api/posts` che accetta una `POST` per creare un nuovo articolo.\n2. **Form**: Crea un form React nella pagina `/blog/new`.\n3. **Submission**: All'invio, usa `fetch` per mandare i dati all'API appena creata.\n4. **Redirect**: Dopo il successo, reindirizza l'utente alla lista dei post."
       },
       {
         lessonNumber: 10,
         title: "Rendering strategies",
         module: "Modulo Next.js",
-        objectives: "Differenziare tra SSG, SSR e ISR.\nScegliere la strategia migliore per le performance.\nOttimizzare il caricamento dei dati.",
-        topics: "1. Static Site Generation (SSG): pre-build dei contenuti.\n2. Server-Side Rendering (SSR): rendering on-demand.\n3. Incremental Static Regeneration (ISR): aggiornare pagine statiche in background.\n4. Cache e Revalidation: usare next: { revalidate: 60 }.\n5. Client-side fetching: quando preferire SWR o React Query.",
-        commands: "fetch(url, { next: { revalidate: 3600 } });",
-        reflectionQuestions: "In quale scenario ISR è la scelta migliore rispetto a SSG?\nCome decidi se una pagina deve essere renderizzata sul server o sul client?\nIn che modo il caching aggressivo può influire sulla freschezza dei dati mostrati all'utente?",
-        homework: "1. Configura una pagina per usare ISR (revalidate ogni 60 secondi).\n2. Confronta i tempi di caricamento tra una pagina SSR e una SSG.\n3. Implementa il fetching lato client per dati che cambiano frequentemente."
+        objectives: "• Diventare un esperto di performance web.\n• Scegliere il bilanciamento perfetto tra velocità e freschezza dei dati.\n• Implementare l'aggiornamento incrementale dei contenuti.",
+        topics: "1. **SSG (Static)**: Velocità imbattibile, ma dati fissi al build.\n2. **SSR (Dynamic)**: Dati sempre freschi, ma un po' più lento.\n3. **ISR (Incremental)**: Il meglio dei due mondi. Aggiorna lo statico ogni X secondi.\n4. **Revalidation**: Usare tag o tempi per svuotare la cache.\n5. **Client Fetching**: Quando i dati sono privati (es. dashboard utente).",
+        commands: "fetch(url, { next: { revalidate: 60 } }) - Abilita ISR su una fetch",
+        reflectionQuestions: "Per un sito di news, quale strategia sceglieresti e ogni quanto tempo?\nE per un pannello di controllo bancario? Perché?\nIn che modo ISR aiuta a scalare applicazioni con milioni di pagine?",
+        homework: "1. **ISR**: Imposta la tua pagina blog per rigenerarsi ogni 30 secondi.\n2. **Dynamic**: Trasforma una pagina in 'force-dynamic' e osserva la differenza nei log del server.\n3. **Experiment**: Cambia un dato nell'API esterna e osserva dopo quanto tempo la tua pagina Next.js si aggiorna."
       },
       {
         lessonNumber: 11,
         title: "Deployment e ottimizzazione finale",
         module: "Modulo Next.js",
-        objectives: "Preparare l'applicazione per la produzione.\nGestire variabili d'ambiente in modo sicuro.\nEffettuare il deployment su Vercel.",
-        topics: "1. Build process: npm run build e controllo errori.\n2. Environment Variables: .env.local vs production secrets.\n3. Middleware: gestire reindirizzamenti o autenticazione base.\n4. Deployment su Vercel: integrazione con GitHub.\n5. Performance monitoring e Core Web Vitals.",
-        commands: "npm run build - Crea la build di produzione\nnpm run start - Avvia la build locale",
-        reflectionQuestions: "Perché non dovresti mai caricare il file .env su GitHub?\nQual è il ruolo del Middleware nel controllo degli accessi di un'app?\nCosa sono i Core Web Vitals e perché Google li considera così importanti per la SEO?",
-        homework: "1. Collega il tuo repository GitHub a Vercel.\n2. Configura le variabili d'ambiente su Vercel.\n3. Esegui il deploy e verifica il funzionamento dell'app live.\n4. Controlla il report di Lighthouse per le performance."
+        objectives: "• Portare il lavoro dal locale al mondo intero.\n• Gestire i segreti di produzione con professionalità.\n• Analizzare i Core Web Vitals per una SEO da primo posto.",
+        topics: "1. **Vercel**: Il paradiso del deployment per Next.js.\n2. **Environment Variables**: `.env.production` e i segreti nel pannello di controllo.\n3. **Middleware**: Proteggere rotte intere con poche righe di codice.\n4. **Lighthouse**: Misurare performance, accessibilità e SEO.\n5. **Bundle Analysis**: Vedere quali librerie pesano troppo e rimuoverle.",
+        commands: "npm run build - Il test finale prima del lancio\nmiddleware.ts - Il file guardiano all'ingresso dell'app",
+        reflectionQuestions: "Perché non usiamo mai le chiavi API 'in chiaro' nel codice sorgente?\nQual è il vantaggio di collegare GitHub a Vercel per il Continuous Deployment?\nCosa faresti se il tuo punteggio Lighthouse fosse basso in 'Performance'?",
+        homework: "1. **Deploy**: Carica il progetto finale su GitHub e collegalo a Vercel.\n2. **Secrets**: Aggiungi una variabile d'ambiente `API_KEY` su Vercel.\n3. **Audit**: Lancia un report Lighthouse sulla tua app live e salva lo screenshot.\n4. **Certificazione**: Condividi il link dell'app funzionante!"
       }
     ];
 
