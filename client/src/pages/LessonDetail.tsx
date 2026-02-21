@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GitStructureChart } from "@/components/GitStructureChart";
 import { LESSON_ENHANCEMENTS } from "@/data/lesson-enhancements";
 import { LESSON_ACADEMY } from "@/data/lesson-academy";
-import { LessonDemoFrame } from "@/components/LessonDemoFrame";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function LessonDetail() {
@@ -43,8 +42,8 @@ export default function LessonDetail() {
             </div>
             <h2 className="text-2xl font-bold">Lezione Bloccata</h2>
             <p className="text-muted-foreground">
-              Questa lezione fa parte di un percorso incrementale. 
-              Devi completare la lezione precedente prima di poter sbloccare questa.
+              Questa lezione e bloccata dalla configurazione corrente del corso.
+              Aggiorna la variabile ambiente per aumentare il livello di sblocco incrementale.
             </p>
             <Button onClick={() => setLocation("/panoramica")} className="mt-4">
               Torna alla Panoramica
@@ -131,7 +130,7 @@ export default function LessonDetail() {
                 <section className="space-y-8">
                   <div className="flex items-center gap-3">
                     <GraduationCap className="w-5 h-5 text-primary" />
-                    <h2 className="text-2xl font-bold tracking-tight">Spiegazione guidata (stile universitario)</h2>
+                    <h2 className="text-2xl font-bold tracking-tight">Spiegazione guidata</h2>
                   </div>
 
                   <Card className="border-primary/25 bg-card">
@@ -213,11 +212,6 @@ export default function LessonDetail() {
                         </Card>
                       ))}
                     </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold tracking-tight">Laboratorio interattivo</h3>
-                    <LessonDemoFrame demo={academy.demo} />
                   </div>
                 </section>
               )}

@@ -66,7 +66,7 @@ export function ModuleCard({ title, lessons, color }: ModuleCardProps) {
                     2-3 ore
                   </span>
                   <span className="truncate max-w-[200px] hidden sm:inline-block opacity-70">
-                    {lesson.isLocked ? "Completa la lezione precedente" : lesson.topics.split('\n')[0].substring(0, 30) + "..."}
+                    {lesson.isLocked ? "Bloccata dalla configurazione corso" : lesson.topics.split('\n')[0].substring(0, 30) + "..."}
                   </span>
                 </div>
               </div>

@@ -24,10 +24,6 @@ export function SiteHeader() {
             <span className="block font-display text-sm font-bold text-foreground md:text-base">
               Code With Fra
             </span>
-            <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/90 md:text-xs">
-              Premium Academy
-              <Sparkles className="h-3 w-3" />
-            </span>
           </span>
         </Link>
 

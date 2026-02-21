@@ -1,5 +1,3 @@
-import type { LessonDemo } from "@/components/LessonDemoFrame";
-
 export type LessonSection = {
   title: string;
   paragraphs: string[];
@@ -19,7 +17,6 @@ export type LessonAcademyContent = {
   commonMistakes: string[];
   checklist: string[];
   snapshots: LessonSnapshot[];
-  demo: LessonDemo;
 };
 
 export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
@@ -27,7 +24,7 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     intro:
       "In questa lezione impari Git come sistema di controllo della conoscenza tecnica: ogni commit racconta una decisione, non solo una modifica.",
     context: [
-      "Scenario universitario: lavori in team su un progetto semestrale e dovete evitare sovrascritture e perdita di lavoro.",
+      "Scenario didattico: lavori in team su un progetto semestrale e dovete evitare sovrascritture e perdita di lavoro.",
       "Scenario aziendale: una fix urgente deve arrivare in produzione senza rompere il ramo principale.",
     ],
     sections: [
@@ -72,18 +69,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Visuale sintetica di main, feature e merge commit.",
       },
     ],
-    demo: {
-      title: "Simulatore semplificato di commit e merge",
-      description: "Premi i pulsanti per vedere come cresce la storia del repository.",
-      html: '<h4>Repository Demo</h4><div style="display:flex;gap:8px;margin:8px 0"><button id="commitBtn">Nuovo Commit</button><button id="branchBtn">Nuovo Branch</button><button id="mergeBtn">Merge</button></div><div id="graph"></div>',
-      css: '#graph{font-family:monospace;font-size:13px;line-height:1.5} button{padding:6px 10px;border-radius:8px;border:1px solid #d6a84f;background:#231a10;color:#f3e7c8;cursor:pointer}',
-      js: 'let commit=1;let branch=0;const graph=document.getElementById("graph");function render(){graph.textContent=`main: c1..c${commit} | feature branches: ${branch}`;}document.getElementById("commitBtn").onclick=()=>{commit++;render();};document.getElementById("branchBtn").onclick=()=>{branch++;render();};document.getElementById("mergeBtn").onclick=()=>{if(branch>0){branch--;commit++;console.log("Merge eseguito in main");render();}else{console.log("Nessun branch da mergiare");}};render();',
-      instructions: [
-        "Aggiungi commit e osserva la cronologia.",
-        "Crea branch e poi integra con merge.",
-        "Leggi l'output per capire l'effetto delle azioni.",
-      ],
-    },
   },
   2: {
     intro:
@@ -129,18 +114,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Gerarchia parent/child con flusso unidirezionale delle props.",
       },
     ],
-    demo: {
-      title: "Render dinamico da configurazione",
-      description: "Modifica il titolo e osserva come la UI si aggiorna in modo dichiarativo.",
-      html: '<label>Titolo: <input id="titleInput" value="Corso React" /></label><h2 id="title"></h2>',
-      css: 'input{margin-left:8px;padding:6px 8px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9} h2{margin-top:12px}',
-      js: 'const input=document.getElementById("titleInput");const title=document.getElementById("title");function render(){title.textContent=`Hero: ${input.value}`;}input.addEventListener("input",render);render();',
-      instructions: [
-        "Scrivi un nuovo titolo.",
-        "Osserva l'aggiornamento immediato.",
-        "Collega il comportamento al concetto di UI dichiarativa.",
-      ],
-    },
   },
   3: {
     intro:
@@ -186,17 +159,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Schema del ciclo reattivo nei componenti React.",
       },
     ],
-    demo: {
-      title: "Validazione live email",
-      description: "Prova indirizzi validi/non validi e osserva il feedback.",
-      html: '<input id="email" placeholder="nome@dominio.com" /><p id="msg"></p>',
-      css: 'input{width:100%;max-width:320px;padding:8px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9} #msg{margin-top:8px;font-size:13px}',
-      js: 'const email=document.getElementById("email");const msg=document.getElementById("msg");const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;email.addEventListener("input",()=>{if(!email.value){msg.textContent="Inserisci un indirizzo email";return;}msg.textContent=re.test(email.value)?"Formato corretto":"Formato non valido";});',
-      instructions: [
-        "Scrivi email incomplete e poi complete.",
-        "Osserva quando la validazione passa a stato corretto.",
-      ],
-    },
   },
   4: {
     intro: "Rendering dinamico significa tradurre dati in struttura visiva mantenendo identita stabile degli elementi.",
@@ -233,14 +195,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Comparazione tra loading, empty e success state.",
       },
     ],
-    demo: {
-      title: "Filtro lista in tempo reale",
-      description: "Digita una lettera e guarda come la lista si adatta.",
-      html: '<input id="q" placeholder="Filtra..." /><ul id="list"></ul>',
-      css: 'input{padding:7px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9} ul{margin-top:10px;padding-left:18px}',
-      js: 'const data=["React","Redux","Router","Recharts","Radix"];const q=document.getElementById("q");const list=document.getElementById("list");function render(){list.innerHTML="";const f=data.filter(i=>i.toLowerCase().includes(q.value.toLowerCase()));if(f.length===0){list.innerHTML="<li>Nessun risultato</li>";return;}f.forEach(i=>{const li=document.createElement("li");li.textContent=i;list.appendChild(li);});}q.addEventListener("input",render);render();',
-      instructions: ["Filtra per prefisso e sottostringa", "Verifica comportamento in empty state"],
-    },
   },
   5: {
     intro: "La composizione avanzata ti permette di scalare il codice mantenendo chiarezza e riducendo accoppiamento.",
@@ -273,14 +227,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Il parent coordina stato e azioni, i child renderizzano.",
       },
     ],
-    demo: {
-      title: "Stato condiviso toolbar + lista",
-      description: "Un unico stato guida due viste diverse.",
-      html: '<select id="status"><option value="all">Tutti</option><option value="todo">Todo</option><option value="done">Done</option></select><p id="count"></p>',
-      css: 'select{padding:6px 8px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9}',
-      js: 'const tasks=[{t:"UI",s:"todo"},{t:"API",s:"done"},{t:"Test",s:"todo"}];const status=document.getElementById("status");const count=document.getElementById("count");function render(){const v=status.value;const filtered=v==="all"?tasks:tasks.filter(x=>x.s===v);count.textContent=`Elementi visibili: ${filtered.length}`;}status.addEventListener("change",render);render();',
-      instructions: ["Cambia filtro", "Osserva che tutto dipende da un solo stato"],
-    },
   },
   6: {
     intro: "Gli effetti sono il ponte verso il mondo esterno: vanno usati con disciplina per evitare inconsistenza e leak.",
@@ -314,20 +260,12 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Montaggio, aggiornamento e cleanup in sequenza.",
       },
     ],
-    demo: {
-      title: "Autosave locale",
-      description: "Scrivi testo e verifica salvataggio/ripristino automatico.",
-      html: '<textarea id="note" rows="5" style="width:100%" placeholder="Scrivi appunti..."></textarea><p id="saved"></p>',
-      css: 'textarea{padding:8px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9} #saved{font-size:12px;color:#cdb37a}',
-      js: 'const key="demo_note";const note=document.getElementById("note");const saved=document.getElementById("saved");note.value=localStorage.getItem(key)||"";note.addEventListener("input",()=>{localStorage.setItem(key,note.value);saved.textContent="Salvato in localStorage";});',
-      instructions: ["Ricarica il frame con Esegui", "Verifica che il testo venga ripristinato"],
-    },
   },
   7: {
     intro: "Next.js moderno richiede una scelta esplicita del confine Server/Client per ottimizzare performance e DX.",
     context: [
       "Scenario portale contenuti con SEO forte.",
-      "Scenario app con aree interattive ma rendering server dominante.",
+      "Scenario app con aree con stato locale ma rendering server dominante.",
     ],
     sections: [
       {
@@ -340,7 +278,7 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
       {
         title: "Server-first",
         paragraphs: [
-          "Mantieni lato server tutto cio che non richiede interazione diretta utente.",
+          "Mantieni lato server tutto cio che non richiede stato o eventi lato browser.",
         ],
         bullets: ["Riduci JS al client", "Migliora TTFB e hydration cost"],
       },
@@ -354,14 +292,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Schema di layout, page e segmenti dinamici.",
       },
     ],
-    demo: {
-      title: "Simulatore Server vs Client boundary",
-      description: "Attiva/disattiva blocchi client-only e osserva il carico JS simulato.",
-      html: '<label><input type="checkbox" id="c1" checked/> Navbar client</label><br/><label><input type="checkbox" id="c2"/> Hero client</label><br/><label><input type="checkbox" id="c3"/> Sidebar client</label><p id="score"></p>',
-      css: 'label{display:block;margin-bottom:4px} #score{margin-top:8px;font-weight:600}',
-      js: 'const checks=["c1","c2","c3"].map(id=>document.getElementById(id));const score=document.getElementById("score");function render(){const active=checks.filter(c=>c.checked).length;score.textContent=`Componenti client: ${active} | costo JS stimato: ${active*25}kb`; }checks.forEach(c=>c.addEventListener("change",render));render();',
-      instructions: ["Riduci i componenti client", "Mantieni client solo dove serve interazione"],
-    },
   },
   8: {
     intro: "Il routing dinamico non e solo sintassi: e progettazione del ciclo dati, caching e fallback UX.",
@@ -394,14 +324,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Dalla URL al fetch fino al fallback not-found.",
       },
     ],
-    demo: {
-      title: "Resolver slug",
-      description: "Prova slug validi/non validi e osserva il fallback.",
-      html: '<input id="slug" value="react"/><button id="go">Risolvi</button><p id="res"></p>',
-      css: 'input,button{padding:6px 8px;margin-right:6px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9}',
-      js: 'const posts=["react","nextjs","typescript"];const slug=document.getElementById("slug");const res=document.getElementById("res");document.getElementById("go").onclick=()=>{res.textContent=posts.includes(slug.value)?`Post trovato: ${slug.value}`:"notFound()";};',
-      instructions: ["Inserisci slug inesistenti", "Confronta esito trovato vs notFound"],
-    },
   },
   9: {
     intro: "Le API non sono solo endpoint: sono contratti di validazione, semantica HTTP e gestione errori per il frontend.",
@@ -435,14 +357,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Request -> validate -> response con stati codificati.",
       },
     ],
-    demo: {
-      title: "Validatore payload",
-      description: "Simula una POST e verifica se il payload e valido.",
-      html: '<input id="email" placeholder="email"/><input id="msg" placeholder="messaggio"/><button id="send">Valida</button><p id="out"></p>',
-      css: 'input,button{display:block;margin:6px 0;padding:6px 8px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9}',
-      js: 'const out=document.getElementById("out");document.getElementById("send").onclick=()=>{const email=document.getElementById("email").value;const msg=document.getElementById("msg").value;const ok=email.includes("@")&&msg.length>=10;out.textContent=ok?"201 Created":"422 Validation Error";};',
-      instructions: ["Inserisci messaggi troppo brevi", "Osserva la differenza 201 vs 422"],
-    },
   },
   10: {
     intro: "SSG, SSR e ISR sono decisioni di prodotto e infrastruttura: non solo opzioni tecniche.",
@@ -477,14 +391,6 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Schema decisionale SSG vs SSR vs ISR.",
       },
     ],
-    demo: {
-      title: "Scelta strategia rendering",
-      description: "Imposta frequenza aggiornamento e personalizzazione per ottenere una raccomandazione.",
-      html: '<label>Aggiornamento dati: <select id="freq"><option value="rare">Raro</option><option value="medium">Medio</option><option value="high">Alto</option></select></label><label>Personalizzazione: <select id="personal"><option value="no">No</option><option value="yes">Si</option></select></label><p id="ans"></p>',
-      css: 'label{display:block;margin:6px 0} select{margin-left:8px;padding:6px;border-radius:8px;border:1px solid #a6823b;background:#151311;color:#f4e8c9}',
-      js: 'const freq=document.getElementById("freq");const personal=document.getElementById("personal");const ans=document.getElementById("ans");function evalMode(){if(personal.value==="yes") ans.textContent="Suggerito: SSR";else if(freq.value==="high") ans.textContent="Suggerito: ISR";else ans.textContent="Suggerito: SSG";}freq.onchange=evalMode;personal.onchange=evalMode;evalMode();',
-      instructions: ["Prova tutte le combinazioni", "Collega il risultato al caso prodotto"],
-    },
   },
   11: {
     intro: "Deploy e ottimizzazione finale trasformano il codice in prodotto affidabile, monitorato e migliorabile nel tempo.",
@@ -518,13 +424,5 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         caption: "Da commit a produzione con gate di qualita.",
       },
     ],
-    demo: {
-      title: "Checklist pre-deploy",
-      description: "Spunta i controlli e verifica quando il rilascio e consentito.",
-      html: '<label><input type="checkbox" class="c"/> Typecheck</label><label><input type="checkbox" class="c"/> Build</label><label><input type="checkbox" class="c"/> Preview QA</label><label><input type="checkbox" class="c"/> Env validate</label><p id="go"></p>',
-      css: 'label{display:block;margin:4px 0} #go{margin-top:8px;font-weight:700}',
-      js: 'const checks=[...document.querySelectorAll(".c")];const go=document.getElementById("go");function render(){const ok=checks.every(c=>c.checked);go.textContent=ok?"Deploy consentito":"Deploy bloccato: checklist incompleta";}checks.forEach(c=>c.addEventListener("change",render));render();',
-      instructions: ["Completa i controlli uno alla volta", "Osserva la regola di gate prima del deploy"],
-    },
   },
 };

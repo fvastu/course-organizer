@@ -23,34 +23,10 @@ export default function HomePage() {
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/35 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest">
-                <Gem className="h-3.5 w-3.5 text-primary" />
-                Premium Learning Experience
-              </div>
-
               <h1 className="font-display text-4xl font-bold leading-[1.05] md:text-6xl">
-                Domina React e Next.js
-                <span className="block text-primary">con un percorso italiano d’élite</span>
+                Apprendi React e Next.js
               </h1>
 
-              <p className="max-w-2xl text-base text-muted-foreground md:text-lg">
-                Una piattaforma elegante e concreta: lezioni aggiornate, esercizi ad alto valore e una progressione chiara fino al progetto finale portfolio-ready.
-              </p>
-
-              <div className="grid gap-2 sm:grid-cols-2">
-                {highlights.map((item, idx) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * idx + 0.15 }}
-                    className="flex items-center gap-2 rounded-xl border border-primary/20 bg-background/70 px-3 py-2 text-sm"
-                  >
-                    <CheckCircle2 className="h-4 w-4 text-primary" />
-                    <span>{item}</span>
-                  </motion.div>
-                ))}
-              </div>
 
               <div className="flex flex-col gap-3 pt-1 sm:flex-row">
                 <Link

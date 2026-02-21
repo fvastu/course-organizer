@@ -11,6 +11,17 @@ type LessonUpdateInput = {
   isCompleted?: boolean;
 };
 
+const MIN_UNLOCKED_LESSON = 1;
+const MAX_UNLOCKED_LESSON = 10;
+const DEFAULT_UNLOCKED_LESSON = 1;
+
+function getUnlockedLessonMax() {
+  const rawValue = import.meta.env.VITE_UNLOCKED_LESSON_MAX;
+  const parsed = Number.parseInt(String(rawValue ?? ""), 10);
+  if (Number.isNaN(parsed)) return DEFAULT_UNLOCKED_LESSON;
+  return Math.min(MAX_UNLOCKED_LESSON, Math.max(MIN_UNLOCKED_LESSON, parsed));
+}
+
 function readProgress(): ProgressMap {
   if (typeof window === "undefined") return {};
 
@@ -30,10 +41,11 @@ function writeProgress(progress: ProgressMap) {
 }
 
 function withProgress(lesson: CourseLesson, progress: ProgressMap): CourseLesson {
+  const unlockedLessonMax = getUnlockedLessonMax();
   return {
     ...lesson,
     isCompleted: Boolean(progress[lesson.id]),
-    isLocked: false,
+    isLocked: lesson.lessonNumber > unlockedLessonMax,
   };
 }
 
@@ -57,6 +69,9 @@ export function useLesson(id: number) {
     queryFn: async () => {
       const lesson = getAllLessons().find((entry) => entry.id === id);
       if (!lesson) return null;
+      if (lesson.isLocked) {
+        throw new Error("Lezione bloccata dalla configurazione");
+      }
       return lesson;
     },
   });
