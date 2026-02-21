@@ -8,28 +8,28 @@
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;
 
-  /* Premium black & gold palette */
-  --background: 222 28% 6%;
-  --foreground: 45 42% 92%;
+  /* Premium light gold palette */
+  --background: 42 45% 96%;
+  --foreground: 222 28% 10%;
   
-  --primary: 43 74% 55%;
-  --primary-foreground: 222 28% 6%;
+  --primary: 41 65% 42%;
+  --primary-foreground: 42 45% 96%;
   
-  --secondary: 222 19% 12%;
-  --secondary-foreground: 45 42% 92%;
+  --secondary: 42 36% 90%;
+  --secondary-foreground: 222 28% 10%;
   
-  --muted: 223 17% 16%;
-  --muted-foreground: 43 20% 68%;
+  --muted: 42 28% 92%;
+  --muted-foreground: 35 20% 36%;
   
-  --accent: 38 64% 46%;
-  --accent-foreground: 222 28% 6%;
+  --accent: 41 60% 50%;
+  --accent-foreground: 222 28% 10%;
   
   --destructive: 0 72% 48%;
   --destructive-foreground: 0 0% 100%;
   
-  --border: 43 30% 28%;
-  --input: 223 17% 16%;
-  --ring: 43 74% 55%;
+  --border: 40 30% 78%;
+  --input: 40 30% 92%;
+  --ring: 41 65% 42%;
   
   --radius: 0.75rem;
 }
@@ -90,7 +90,7 @@
 
 /* Utilities */
 .glass-panel {
-  @apply bg-black/60 backdrop-blur-md border border-primary/20 shadow-xl;
+  @apply bg-background/70 backdrop-blur-md border border-primary/20 shadow-xl;
 }
 
 .card-hover {
