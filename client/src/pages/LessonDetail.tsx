@@ -198,21 +198,6 @@ export default function LessonDetail() {
                       </CardContent>
                     </Card>
                   </div>
-
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold tracking-tight">Snapshot visivo</h3>
-                    <div className="grid gap-4">
-                      {academy.snapshots.map((shot, idx) => (
-                        <Card key={idx} className="overflow-hidden border-primary/25 bg-card">
-                          <img src={shot.src} alt={shot.title} className="w-full border-b border-primary/15" />
-                          <CardContent className="p-4">
-                            <p className="text-sm font-semibold">{shot.title}</p>
-                            <p className="text-xs text-muted-foreground mt-1">{shot.caption}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </div>
                 </section>
               )}
               
