@@ -129,7 +129,7 @@ export default function LessonDetail() {
                   {objectives.map((obj, i) => (
                     <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-muted/40 border border-transparent hover:border-primary/20 transition-all">
                       <CheckCircle2 className="w-5 h-5 text-primary/60 mt-0.5 flex-shrink-0" />
-                      <span className="text-foreground/80 leading-relaxed">{obj}</span>
+                      <span className="text-foreground/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: obj }} />
                     </div>
                   ))}
                 </div>
@@ -146,9 +146,7 @@ export default function LessonDetail() {
                     {topics.map((topic, i) => (
                       <li key={i} className="relative pl-8 group">
                         <div className="absolute left-0 top-3 w-2 h-2 rounded-full bg-primary/30 group-hover:bg-primary transition-colors" />
-                        <div className="text-lg text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed">
-                          {topic}
-                        </div>
+                        <div className="text-lg text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed" dangerouslySetInnerHTML={{ __html: topic }} />
                       </li>
                     ))}
                   </ul>
