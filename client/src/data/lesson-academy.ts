@@ -51,16 +51,30 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
           "Mai force push su main",
         ],
       },
+      {
+        title: "Tag e deploy release-based",
+        paragraphs: [
+          "Un tag identifica in modo immutabile il commit di una release (es. v1.0.0).",
+          "Deployare da tag rende il rilascio ripetibile: sai sempre esattamente quale commit e andato in produzione.",
+        ],
+        bullets: [
+          "Preferisci tag annotati (`git tag -a`) per includere messaggio release",
+          "Pipeline CI su pattern `v*` per deploy controllati",
+          "Rollback rapido: ridistribuisci tag precedente stabile",
+        ],
+      },
     ],
     commonMistakes: [
       "Commit monolitici con file non correlati",
       "Messaggi vaghi tipo 'fix' o 'update'",
       "Conflitti risolti senza test finale locale",
+      "Deploy da branch volatile senza tag di riferimento",
     ],
     checklist: [
       "Ho sincronizzato il branch con main",
       "Ogni commit ha una responsabilita chiara",
       "La PR include descrizione, contesto e test",
+      "La release e marcata con tag annotato pubblicato su origin",
     ],
     snapshots: [
       {
