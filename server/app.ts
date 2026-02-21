@@ -1,6 +1,6 @@
 import express from "express";
-import { registerRoutes } from "./routes";
-import { serveStatic } from "./static";
+import { registerRoutes } from "./routes.ts";
+import { serveStatic } from "./static.ts";
 
 declare module "http" {
   interface IncomingMessage {

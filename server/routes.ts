@@ -1,7 +1,7 @@
-import { storage } from "./storage";
-import { api } from "@shared/routes";
+import { storage } from "./storage.ts";
+import { api } from "../shared/routes.ts";
 import { z } from "zod";
-import { seedLessons } from "./lessons";
+import { seedLessons } from "./lessons/index.ts";
 
 // Set to true to require completing lessons in order
 const REQUIRE_SEQUENTIAL_UNLOCK = false;

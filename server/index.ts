@@ -1,12 +1,12 @@
 import { createServer } from "http";
-import { createApp, log } from "./app";
+import { createApp, log } from "./app.ts";
 
 async function start() {
   const app = await createApp();
   const httpServer = createServer(app);
 
   if (process.env.NODE_ENV !== "production") {
-    const { setupVite } = await import("./vite");
+    const { setupVite } = await import("./vite.ts");
     await setupVite(httpServer, app);
   }
 
