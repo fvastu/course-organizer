@@ -5,7 +5,7 @@ import path from "path";
 export function serveStatic(app: any) {
   const candidatePaths = [
     path.resolve(process.cwd(), "dist/public"),
-    path.resolve(__dirname, "public"),
+    path.resolve(process.cwd(), "server/public"),
   ];
   const distPath = candidatePaths.find((entry) => fs.existsSync(entry));
 
