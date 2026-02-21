@@ -42,15 +42,15 @@ export default function LessonDetail() {
               Questa lezione fa parte di un percorso incrementale. 
               Devi completare la lezione precedente prima di poter sbloccare questa.
             </p>
-            <Button onClick={() => setLocation("/")} className="mt-4">
-              Torna alla Dashboard
+            <Button onClick={() => setLocation("/panoramica")} className="mt-4">
+              Torna alla Panoramica
             </Button>
           </motion.div>
         ) : (
           <>
             <div className="text-destructive font-bold text-lg">Lezione non trovata</div>
-            <Link href="/">
-              <Button variant="outline">Torna alla Dashboard</Button>
+            <Link href="/panoramica">
+              <Button variant="outline">Torna alla Panoramica</Button>
             </Link>
           </>
         )}
@@ -158,7 +158,7 @@ export default function LessonDetail() {
                 <section className="space-y-6">
                   <div className="flex items-center gap-3">
                     <Terminal className="w-5 h-5 text-primary" />
-                    <h2 className="text-2xl font-bold tracking-tight">Toolkit & Comandi</h2>
+                    <h2 className="text-2xl font-bold tracking-tight">Strumenti e Comandi</h2>
                   </div>
                   <div className="rounded-2xl border bg-zinc-950 p-6 font-mono text-sm overflow-hidden relative">
                     <div className="absolute top-0 right-0 p-4 opacity-10">

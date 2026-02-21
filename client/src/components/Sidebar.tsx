@@ -1,13 +1,14 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
-import { BookOpen, CheckCircle2, GraduationCap, Layout, ChevronRight } from "lucide-react";
+import { BookOpen, CheckCircle2, GraduationCap, Layout, ChevronRight, Home } from "lucide-react";
 
 interface SidebarProps {
   className?: string;
 }
 
 const navItems = [
-  { href: "/", label: "Homepage", icon: Layout },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/panoramica", label: "Panoramica", icon: Layout },
   { href: "/curriculum", label: "Programma Corso", icon: BookOpen },
 ];
 
@@ -55,13 +56,13 @@ export function Sidebar({ className }: SidebarProps) {
           </div>
           <h3 className="font-semibold mb-1 relative z-10">Obiettivo Finale</h3>
           <p className="text-xs text-slate-300 relative z-10 leading-relaxed">
-            Completa tutte le 11 lezioni per ottenere la certificazione Junior React Developer.
+            Completa tutte le 11 lezioni per ottenere il tuo attestato Junior React Developer.
           </p>
         </div>
       </nav>
 
       <div className="p-4 border-t border-border/50 text-xs text-center text-muted-foreground">
-        &copy; 2024 React Course
+        &copy; 2026 Percorso React & Next.js
       </div>
     </aside>
   );

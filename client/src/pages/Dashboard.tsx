@@ -64,11 +64,11 @@ export default function Dashboard() {
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
                 <Sparkles className="h-3.5 w-3.5 text-amber-300" />
-                Home del percorso
+                Panoramica del percorso
               </div>
 
               <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight">
-                Una homepage dedicata al tuo
+                Traccia il tuo
                 <span className="text-amber-300"> percorso completo</span>
               </h2>
 
@@ -158,11 +158,11 @@ export default function Dashboard() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-              <ModuleCard title="Modulo 2: React Core" lessons={reactModule} color="bg-teal-600" />
+              <ModuleCard title="Modulo 2: Fondamenti React" lessons={reactModule} color="bg-teal-600" />
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }}>
-              <ModuleCard title="Modulo 3: Next.js Framework" lessons={nextModule} color="bg-slate-800" />
+              <ModuleCard title="Modulo 3: Ecosistema Next.js" lessons={nextModule} color="bg-slate-800" />
             </motion.div>
           </section>
 
