@@ -18,7 +18,7 @@ export default function NotFound() {
           </p>
 
           <Link href="/" className="mt-6 inline-block">
-            <Button>Torna alla Home</Button>
+            <Button>Torna all'inizio</Button>
           </Link>
         </CardContent>
       </Card>
