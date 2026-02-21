@@ -3,13 +3,13 @@
   "functions": {
     "api/index.ts": {
       "maxDuration": 30,
-      "includeFiles": "dist/public/**"
+      "includeFiles": "{dist/public/**,server/**,shared/**}"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/api/index.ts"
+      "src": "/(.*)",
+      "dest": "/api/index.ts"
     }
   ]
 }
