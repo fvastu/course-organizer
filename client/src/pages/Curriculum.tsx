@@ -23,7 +23,7 @@ export default function Curriculum() {
       <Sidebar className="hidden md:flex" />
       
       <main className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <div className="p-8 max-w-5xl mx-auto w-full">
+        <div className="p-8 w-full">
           <div className="mb-10">
              <h1 className="text-3xl font-bold font-display mb-2">Programma del Corso</h1>
              <p className="text-muted-foreground">Una panoramica completa di tutti i moduli e le lezioni.</p>

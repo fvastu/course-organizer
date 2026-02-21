@@ -79,7 +79,7 @@ export default function LessonDetail() {
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top Navigation Bar */}
         <header className="h-16 border-b border-primary/30 bg-background/90 backdrop-blur-md sticky top-0 z-50">
-          <div className="mx-auto flex h-full w-full max-w-5xl items-center justify-between px-4 md:px-8">
+          <div className="flex h-full w-full items-center justify-between px-4 md:px-8">
             <div className="flex items-center gap-4">
               <Link href="/panoramica">
                 <Button variant="ghost" size="icon" className="rounded-full hover:bg-muted transition-colors">
@@ -107,7 +107,7 @@ export default function LessonDetail() {
 
         {/* Content Area - Notion Style */}
         <div className="flex-1 overflow-y-auto">
-          <article className="max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-12">
+          <article className="px-6 py-12 md:py-20 space-y-12">
             
             {/* Page Header */}
             <header className="space-y-6">

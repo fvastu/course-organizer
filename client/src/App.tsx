@@ -30,9 +30,11 @@ function App() {
       <TooltipProvider>
         <ThemeProvider>
           <div className="min-h-screen bg-background text-foreground">
-            <SiteHeader />
-            <Router />
-            <SiteFooter />
+            <div className="mx-auto w-full max-w-5xl">
+              <SiteHeader />
+              <Router />
+              <SiteFooter />
+            </div>
           </div>
           <Toaster />
         </ThemeProvider>

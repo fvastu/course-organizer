@@ -43,7 +43,7 @@ export default function Dashboard() {
 
       <main className="flex-1 min-w-0">
         <div className="md:hidden px-4 py-3 border-b border-primary/30 bg-background/90 backdrop-blur">
-          <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
+          <div className="flex w-full items-center justify-between">
             <h1 className="font-display font-bold">Corso React/Next.js</h1>
             <Link href="/curriculum" className="text-sm font-medium text-primary">
               Programma
@@ -51,7 +51,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-5xl p-4 md:p-8 space-y-8">
+        <div className="w-full p-4 md:p-8 space-y-8">
           <section className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-background to-muted p-8 md:p-12">
             <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
             <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
@@ -133,7 +133,7 @@ export default function Dashboard() {
             </div>
           </section>
 
-          <section className="grid gap-10 max-w-5xl">
+          <section className="grid gap-10">
             <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}>
               <ModuleCard title="Modulo 1: Fondamenti" lessons={foundations} color="bg-[#d6a84f]" />
             </motion.div>
