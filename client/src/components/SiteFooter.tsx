@@ -7,9 +7,9 @@ export function SiteFooter() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.35 }}
-      className="border-t border-primary/30 bg-background/80"
+      className="border-t border-primary/25 bg-background/80"
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-8">
         <p>© 2026 Corso Premium React & Next.js</p>
         <p>Frontend-only · Tema Oro/Nero · Esperienza premium</p>
       </div>
