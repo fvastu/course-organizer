@@ -64,6 +64,21 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     ],
     snapshots: [
       {
+        title: "Aree di Git: working directory, staging, repository",
+        src: "/snapshots/git-areas.png",
+        caption: "Schema delle tre aree principali del flusso Git (fonte: git-scm.com / Pro Git).",
+      },
+      {
+        title: "Ciclo di vita dei file in Git",
+        src: "/snapshots/git-lifecycle.png",
+        caption: "Stati tipici di un file: untracked, modified, staged, committed (fonte: git-scm.com / Pro Git).",
+      },
+      {
+        title: "Esempio di branching",
+        src: "/snapshots/basic-branching-1.png",
+        caption: "Vista grafica di un flusso branch/merge di base (fonte: git-scm.com / Pro Git).",
+      },
+      {
         title: "Mappa branch Git",
         src: "/snapshots/git-graph.svg",
         caption: "Visuale sintetica di main, feature e merge commit.",

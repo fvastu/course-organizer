@@ -51,7 +51,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="p-4 md:p-8 space-y-8">
+        <div className="mx-auto w-full max-w-5xl p-4 md:p-8 space-y-8">
           <section className="relative overflow-hidden rounded-[28px] border border-primary/30 bg-gradient-to-br from-card via-background to-muted p-8 md:p-12">
             <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
             <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />

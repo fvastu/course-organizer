@@ -73,7 +73,7 @@ export default function LessonDetail() {
   const academy = LESSON_ACADEMY[lesson.lessonNumber];
 
   return (
-    <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
+    <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10 max-w-5xl">
       <Sidebar className="hidden md:flex border-r border-primary/30 bg-card" />
       
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
@@ -105,7 +105,7 @@ export default function LessonDetail() {
 
         {/* Content Area - Notion Style */}
         <div className="flex-1 overflow-y-auto">
-          <article className="max-w-3xl mx-auto px-6 py-12 md:py-20 space-y-12">
+          <article className="max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-12">
             
             {/* Page Header */}
             <header className="space-y-6">

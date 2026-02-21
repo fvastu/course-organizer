@@ -11,7 +11,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_10%_5%,hsl(var(--secondary))_0%,hsl(var(--background))_55%)] text-foreground">
-      <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-8 md:py-12">
+      <main className="mx-auto w-full max-w-5xl px-4 py-8 md:px-8 md:py-12">
         <section className="relative overflow-hidden rounded-[36px] border border-primary/30 bg-gradient-to-br from-card via-background to-muted p-7 shadow-2xl md:p-12">
           <div className="absolute -top-24 right-[-90px] h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
           <div className="absolute -bottom-24 left-[-90px] h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
