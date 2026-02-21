@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
-import { type LessonResponse } from "@shared/routes";
+import { type CourseLesson } from "@/data/lessons";
 import { CheckCircle2, Lock, Clock, ChevronRight } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 
 interface ModuleCardProps {
   title: string;
-  lessons: (LessonResponse & { isLocked?: boolean })[];
+  lessons: (CourseLesson & { isLocked?: boolean })[];
   color: string;
 }
 

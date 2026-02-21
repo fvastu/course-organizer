@@ -1,61 +1,89 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, buildUrl, type LessonUpdateInput } from "@shared/routes";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { LESSONS_SEED, type CourseLesson } from "@/data/lessons";
+
+const LESSONS_QUERY_KEY = ["lessons"] as const;
+const LESSON_QUERY_KEY = "lesson";
+const PROGRESS_STORAGE_KEY = "course-organizer-progress-v1";
+
+type ProgressMap = Record<number, boolean>;
+
+type LessonUpdateInput = {
+  isCompleted?: boolean;
+};
+
+function readProgress(): ProgressMap {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const raw = window.localStorage.getItem(PROGRESS_STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as ProgressMap;
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeProgress(progress: ProgressMap) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
+}
+
+function withProgress(lesson: CourseLesson, progress: ProgressMap): CourseLesson {
+  return {
+    ...lesson,
+    isCompleted: Boolean(progress[lesson.id]),
+    isLocked: false,
+  };
+}
+
+function getAllLessons(): CourseLesson[] {
+  const progress = readProgress();
+  return LESSONS_SEED.map((lesson) => withProgress(lesson, progress)).sort(
+    (a, b) => a.lessonNumber - b.lessonNumber,
+  );
+}
 
 export function useLessons() {
   return useQuery({
-    queryKey: [api.lessons.list.path],
-    queryFn: async () => {
-      const res = await fetch(api.lessons.list.path, { credentials: "include" });
-      if (!res.ok) throw new Error("Errore nel caricamento delle lezioni");
-      return api.lessons.list.responses[200].parse(await res.json());
-    },
+    queryKey: LESSONS_QUERY_KEY,
+    queryFn: async () => getAllLessons(),
   });
 }
 
 export function useLesson(id: number) {
   return useQuery({
-    queryKey: [api.lessons.get.path, id],
+    queryKey: [LESSON_QUERY_KEY, id],
     queryFn: async () => {
-      const url = buildUrl(api.lessons.get.path, { id });
-      const res = await fetch(url, { credentials: "include" });
-      if (res.status === 404) return null;
-      if (!res.ok) throw new Error("Errore nel caricamento della lezione");
-      return api.lessons.get.responses[200].parse(await res.json());
+      const lesson = getAllLessons().find((entry) => entry.id === id);
+      if (!lesson) return null;
+      return lesson;
     },
   });
 }
 
 export function useUpdateLesson() {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async ({ id, ...updates }: { id: number } & LessonUpdateInput) => {
-      const validated = api.lessons.update.input.parse(updates);
-      const url = buildUrl(api.lessons.update.path, { id });
-      const res = await fetch(url, {
-        method: api.lessons.update.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validated),
-        credentials: "include",
-      });
-      
-      if (!res.ok) {
-        if (res.status === 404) throw new Error("Lezione non trovata");
-        if (res.status === 400) {
-           // Try to parse validation error
-           try {
-             const errorData = await res.json();
-             const error = api.lessons.update.responses[400].parse(errorData);
-             throw new Error(error.message);
-           } catch (e) {
-             throw new Error("Dati non validi");
-           }
-        }
-        throw new Error("Errore nell'aggiornamento");
+      const lessons = getAllLessons();
+      const lesson = lessons.find((entry) => entry.id === id);
+      if (!lesson) {
+        throw new Error("Lezione non trovata");
       }
-      return api.lessons.update.responses[200].parse(await res.json());
+
+      if (typeof updates.isCompleted === "boolean") {
+        const current = readProgress();
+        current[id] = updates.isCompleted;
+        writeProgress(current);
+      }
+
+      return getAllLessons().find((entry) => entry.id === id) as CourseLesson;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [api.lessons.list.path] });
+    onSuccess: (_updated, variables) => {
+      queryClient.invalidateQueries({ queryKey: LESSONS_QUERY_KEY });
+      queryClient.invalidateQueries({ queryKey: [LESSON_QUERY_KEY, variables.id] });
     },
   });
 }
