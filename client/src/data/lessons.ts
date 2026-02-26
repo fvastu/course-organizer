@@ -16,6 +16,8 @@ export type CourseLesson = {
   isLocked?: boolean;
   bestPractices?: string; // Sezione extra per best practice moderne
   workflow?: string; // Sezione extra per workflow reale usato in team
+  resources?: string; // URL immagini di risorse, separate da \n
+  snippets?: string; // Snippet di codice, formato: titolo\nlinguaggio\ncodice, separati da ---
 };
 
 // seed.ts
@@ -36,7 +38,7 @@ import lesson11 from "./lessons/lesson-11";
  * 🔥 Seed principale del corso
  * Ordinato automaticamente per sicurezza
  */
-export const LESSONS_SEED: CourseLesson[] = [
+export const LESSONS_SEED = [
   lesson01,
   lesson02,
   lesson03,

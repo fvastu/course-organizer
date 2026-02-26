@@ -3,7 +3,7 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2, GraduationCap, AlertTriangle, ClipboardCheck } from "lucide-react";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2, GraduationCap, AlertTriangle, ClipboardCheck, ImageIcon } from "lucide-react";
 import { Link, useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -13,6 +13,7 @@ import { GitStructureChart } from "@/components/GitStructureChart";
 import { LESSON_ENHANCEMENTS } from "@/data/lesson-enhancements";
 import { LESSON_ACADEMY } from "@/data/lesson-academy";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { CodeBlock } from "@/components/CodeBlock";
 
 export default function LessonDetail() {
   const [, params] = useRoute("/lesson/:id");
@@ -69,8 +70,20 @@ export default function LessonDetail() {
   const topics = lesson.topics.split('\n').filter(Boolean);
   const commands = lesson.commands ? lesson.commands.split('\n').filter(Boolean) : [];
   const reflectionQuestions = lesson.reflectionQuestions ? lesson.reflectionQuestions.split('\n').filter(Boolean) : [];
-  const bestPractices = lesson.bestPractices ? lesson.bestPractices.split('\n').filter(Boolean) : [];
+  const bestPracticesRaw = lesson.bestPractices || '';
+  const hasBpCards = bestPracticesRaw.includes('---');
+  const bestPracticeCards = hasBpCards
+    ? bestPracticesRaw.split('---').map(b => b.trim()).filter(Boolean)
+    : [];
+  const bestPractices = !hasBpCards ? bestPracticesRaw.split('\n').filter(Boolean) : [];
   const workflow = lesson.workflow ? lesson.workflow.split('\n').filter(Boolean) : [];
+  const resources = lesson.resources ? lesson.resources.split('\n').filter(Boolean) : [];
+  const codeSnippets = lesson.snippets
+    ? lesson.snippets.split('---').map(block => {
+        const lines = block.trim().split('\n');
+        return { title: lines[0] || '', language: lines[1] || 'typescript', code: lines.slice(2).join('\n') };
+      }).filter(s => s.code.trim())
+    : [];
   const enhancement = LESSON_ENHANCEMENTS[lesson.lessonNumber];
   const examples = enhancement?.examples ?? [];
   const situations = enhancement?.situations ?? [];
@@ -160,13 +173,32 @@ export default function LessonDetail() {
                 <h2 className="text-2xl font-bold tracking-tight">Punti chiave</h2>
               </div>
               <div className="prose prose-slate dark:prose-invert max-w-none">
-                <ul className="list-none p-0 space-y-6">
-                  {topics.map((topic, i) => (
-                    <li key={i} className="relative pl-8 group">
-                      <div className="absolute left-0 top-3 w-2 h-2 rounded-full bg-primary/30 group-hover:bg-primary transition-colors" />
-                      <div className="text-lg text-foreground/80 group-hover:text-foreground transition-colors leading-relaxed" dangerouslySetInnerHTML={{ __html: topic }} />
-                    </li>
-                  ))}
+                <ul className="list-none p-0 space-y-1">
+                  {topics.map((topic, i) => {
+                    const trimmed = topic.trim();
+                    const isHeader = /^\d+\./.test(trimmed);
+                    const isSubBullet = trimmed.startsWith('-');
+                    const isCallout = trimmed.startsWith('👉');
+                    const isNote = /^nota/i.test(trimmed);
+                    return (
+                      <li key={i} className={`relative group ${isHeader ? 'pl-8 pt-5 first:pt-0' : isSubBullet ? 'pl-14' : 'pl-8'}`}>
+                        {isHeader ? (
+                          <>
+                            <div className="absolute left-0 top-8 first:top-3 w-2 h-2 rounded-full bg-primary group-hover:bg-primary transition-colors" />
+                            <div className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors leading-relaxed" dangerouslySetInnerHTML={{ __html: trimmed }} />
+                          </>
+                        ) : isSubBullet ? (
+                          <div className="text-base text-foreground/70 leading-relaxed before:content-['–'] before:mr-2 before:text-primary/40" dangerouslySetInnerHTML={{ __html: trimmed.replace(/^-\s*/, '') }} />
+                        ) : isCallout ? (
+                          <div className="text-sm text-primary/70 font-medium leading-relaxed">{trimmed}</div>
+                        ) : isNote ? (
+                          <div className="text-sm text-muted-foreground italic leading-relaxed">{trimmed}</div>
+                        ) : (
+                          <div className="text-base text-foreground/80 leading-relaxed">{trimmed}</div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </section>
@@ -202,17 +234,39 @@ export default function LessonDetail() {
             )}
 
             {/* Best Practices */}
-            {bestPractices.length > 0 && (
+            {(bestPractices.length > 0 || bestPracticeCards.length > 0) && (
               <section className="space-y-6">
                 <div className="flex items-center gap-3">
                   <Lightbulb className="w-5 h-5 text-primary" />
                   <h2 className="text-2xl font-bold tracking-tight">Best Practices</h2>
                 </div>
-                <ul className="list-disc list-inside space-y-2 text-foreground/85">
-                  {bestPractices.map((bp, i) => (
-                    <li key={i}>{bp}</li>
-                  ))}
-                </ul>
+                {bestPracticeCards.length > 0 ? (
+                  <div className="grid gap-4">
+                    {bestPracticeCards.map((card, i) => {
+                      const lines = card.split('\n');
+                      const title = lines[0] || '';
+                      const body = lines.slice(1).join('\n').trim();
+                      return (
+                        <Card key={i} className="border border-primary/20 bg-card">
+                          <CardContent className="p-6 space-y-3">
+                            {title && <h3 className="font-semibold text-foreground">{title}</h3>}
+                            {body && (
+                              <div className="text-sm text-foreground/70 whitespace-pre-line leading-relaxed">
+                                {body}
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <ul className="list-disc list-inside space-y-2 text-foreground/85">
+                    {bestPractices.map((bp, i) => (
+                      <li key={i}>{bp}</li>
+                    ))}
+                  </ul>
+                )}
               </section>
             )}
 
@@ -278,6 +332,38 @@ export default function LessonDetail() {
               <section className="space-y-6">
                 <h2 className="text-2xl font-bold tracking-tight">Visualizzazione struttura Git</h2>
                 <GitStructureChart />
+              </section>
+            )}
+
+            {/* Code Snippets */}
+            {codeSnippets.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <Code2 className="w-5 h-5 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Snippet di Codice</h2>
+                </div>
+                <div className="grid gap-6">
+                  {codeSnippets.map((snippet, i) => (
+                    <CodeBlock key={i} code={snippet.code} language={snippet.language} title={snippet.title} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Resources */}
+            {resources.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <ImageIcon className="w-5 h-5 text-primary" />
+                  <h2 className="text-2xl font-bold tracking-tight">Risorse Visive</h2>
+                </div>
+                <div className="grid gap-6">
+                  {resources.map((url, i) => (
+                    <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="block rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-all">
+                      <img src={url} alt={`Risorsa ${i + 1}`} className="w-full object-contain bg-white" loading="lazy" />
+                    </a>
+                  ))}
+                </div>
               </section>
             )}
 

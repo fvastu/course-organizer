@@ -13,6 +13,7 @@ export const lessons = pgTable("lessons", {
   commands: text("commands").default("").notNull(),
   reflectionQuestions: text("reflection_questions").default("").notNull(),
   isCompleted: boolean("is_completed").default(false).notNull(),
+  snippets: text("snippets").default(""),
 });
 
 export const insertLessonSchema = createInsertSchema(lessons).omit({ id: true });

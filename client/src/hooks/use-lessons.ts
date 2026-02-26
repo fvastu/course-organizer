@@ -13,7 +13,7 @@ type LessonUpdateInput = {
 
 const MIN_UNLOCKED_LESSON = 1;
 const MAX_UNLOCKED_LESSON = 10;
-const DEFAULT_UNLOCKED_LESSON = 1;
+const DEFAULT_UNLOCKED_LESSON = 2;
 
 function getUnlockedLessonMax() {
   const rawValue = import.meta.env.VITE_UNLOCKED_LESSON_MAX;

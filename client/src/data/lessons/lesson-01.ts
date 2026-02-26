@@ -70,6 +70,13 @@ export const lesson01: CourseLesson = {
     "Esercizio 3: Apri una pull request tra due branch.\n" +
     "Esercizio 4: Scrivi commit con formato Conventional Commits.",
 
+  resources:
+    "https://docs.wavemaker.com/learn/assets/images/branching-model-121bd320dd2f5972a5f6ce2fb19a3f4e.png\n" +
+    "https://samlearnsazure.blog/wp-content/uploads/2020/12/00featuredimage.png\n" +
+    "https://i.sstatic.net/GEZby.png\n" +
+    "https://images.prismic.io/hatica/27290fcd-a24b-445e-b639-627031a9bcb7_log+1.png?auto=compress,format&rect=0,0,1312,1008&w=1200&h=922\n" +
+    "https://geo-jobe.com/wp-content/uploads/2022/07/DefaultMergeCropped.png",
+
   isCompleted: false,
 };
 
