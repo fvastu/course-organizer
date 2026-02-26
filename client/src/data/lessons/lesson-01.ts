@@ -1,16 +1,76 @@
 import type { CourseLesson } from "../lessons";
 
 export const lesson01: CourseLesson = {
-  "id": 1,
-  "lessonNumber": 1,
-  "title": "Fondamenti di Git e GitHub",
-  "module": "Fondamenti",
-  "objectives": "• Capire il modello distribuito di Git\n• Usare branch e merge in modo sicuro\n• Collaborare con pull request su GitHub\n• Gestire tag di release e flusso deploy su ambienti",
-  "topics": "1. Repository locale e remoto: cosa vive su GitHub e cosa in locale\n2. Commit atomici e messaggi chiari: esempio feat/fix/docs in Conventional Commits\n3. Branching strategy: main, develop, feature/* con flusso pull request\n4. Risoluzione conflitti: esempio pratico su README modificato da due branch\n5. Tag e release: differenza tra lightweight/annotated tag e semantic versioning (v1.2.0)\n6. Deploy flow: tag su commit stabile, build da tag e promozione su staging/production",
-  "commands": "git init - Inizializza un nuovo repository locale (inizio progetto). Esempio: git init\ngit clone <url> - Copia un repository remoto mantenendo tutta la cronologia. Esempio: git clone https://github.com/org/progetto.git\ngit status - Controlla stato file (working tree e area di staging). Esempio: git status\ngit add <file> - Porta modifiche in staging prima del commit. Esempio: git add src/App.tsx\ngit restore --staged <file> - Rimuove un file dallo staging senza perdere modifiche locali. Esempio: git restore --staged src/App.tsx\ngit commit -m 'messaggio' - Salva uno snapshot atomico con descrizione chiara. Esempio: git commit -m 'feat(auth): aggiunge login form'\ngit commit --amend - Corregge ultimo commit (messaggio o piccoli fix). Esempio: git commit --amend -m 'fix(auth): corregge validazione email'\ngit switch -c feature/x - Crea e passa a un nuovo branch feature (workflow moderno). Esempio: git switch -c feature/profile-page\ngit pull --rebase origin main - Aggiorna branch locale evitando merge commit non necessari. Esempio: git pull --rebase origin main\ngit rebase -i HEAD~5 - Riscrive ultimi commit (squash/reword/fixup prima della PR). Esempio: git rebase -i HEAD~5\ngit cherry-pick <hash> - Porta un commit specifico su un altro branch. Esempio: git cherry-pick a1b2c3d\ngit stash push -m 'wip' - Salva temporaneamente lavoro non pronto. Esempio: git stash push -m 'wip: refactor navbar'\ngit stash -p - Versione meno nota: stasha solo parti selezionate (hunk). Esempio: git stash -p\ngit reflog - Meno noto: cronologia movimenti HEAD, utile per recuperare commit persi. Esempio: git reflog\ngit worktree add ../repo-hotfix main - Meno noto: apre una seconda working directory su altro branch. Esempio: git worktree add ../repo-hotfix main\ngit bisect start - Meno noto: ricerca binaria del commit che ha introdotto un bug. Esempio: git bisect start\ngit rerere status - Meno noto: riusa risoluzioni di conflitti gia fatte in passato. Esempio: git rerere status\ngit tag -a v1.0.0 -m 'release 1.0.0' - Crea tag annotato per una release stabile. Esempio: git tag -a v1.0.0 -m 'release 1.0.0'\ngit push origin v1.0.0 - Pubblica il tag remoto per trigger di release/deploy. Esempio: git push origin v1.0.0\ngit push --tags - Invia tutti i tag locali non ancora pubblicati. Esempio: git push --tags\ngit checkout tags/v1.0.0 -b release/v1.0.0 - Crea branch da tag per hotfix controllati. Esempio: git checkout tags/v1.0.0 -b release/v1.0.0\ngit log --graph --oneline --decorate --all - Visualizza grafo completo dei branch. Esempio: git log --graph --oneline --decorate --all\ngit blame <file> - Traccia chi ha modificato ogni riga e in quale commit. Esempio: git blame src/App.tsx",
-  "reflectionQuestions": "Quando usare merge e quando rebase?\nQuali rischi ha il force push su branch condivisi?\nPerche usare tag annotati per le release invece di deployare sempre da main?",
-  "homework": "Esercizio 1: Crea un repository con README e almeno 2 commit.\nEsercizio 2: Simula un conflitto e risolvilo via pull request.\nEsercizio 3: Crea tag v1.0.0 su un commit stabile, pubblicalo su origin e descrivi come lo useresti per un deploy.",
-  "isCompleted": false
+  id: 1,
+  lessonNumber: 1,
+  title: "Fondamenti di Git e GitHub",
+  module: "Fondamenti",
+
+  image:
+    "https://i.ytimg.com/vi/0chZFIZLR_0/maxresdefault.jpg",
+
+  objectives:
+    "Capire il modello distribuito di Git\nUsare branch e merge in modo sicuro\nCollaborare con pull request su GitHub\nGestire tag di release e flusso deploy su ambienti",
+
+  topics:
+    "1. Repository locale e remoto: cosa vive su GitHub e cosa in locale\n" +
+    "2. Commit atomici e messaggi chiari: esempio feat/fix/docs in Conventional Commits\n" +
+    "3. Branching strategy: main, develop, feature/* con flusso pull request\n" +
+    "4. Risoluzione conflitti: esempio pratico su README modificato da due branch\n" +
+    "5. Tag e release: semantic versioning (v1.2.0)\n" +
+    "6. Deploy flow: build da commit stabile e promozione staging → production",
+
+  commands:
+    "git init - Inizializza un nuovo repository locale. Esempio: git init\n" +
+    "git clone <url> - Clona un repository remoto. Esempio: git clone https://github.com/org/progetto.git\n" +
+    "git status - Controlla lo stato dei file. Esempio: git status\n" +
+    "git add <file> - Aggiunge modifiche allo staging. Esempio: git add src/App.tsx\n" +
+    "git add . - Aggiunge tutte le modifiche. Esempio: git add .\n" +
+    "git commit -m 'messaggio' - Salva uno snapshot. Esempio: git commit -m 'feat(auth): login'\n" +
+    "git commit --amend - Modifica ultimo commit. Esempio: git commit --amend -m 'fix(auth): validazione'\n" +
+    "git switch -c feature/x - Crea e passa a un branch. Esempio: git switch -c feature/profile\n" +
+    "git switch main - Passa a un branch esistente. Esempio: git switch main\n" +
+    "git pull origin main - Aggiorna branch locale. Esempio: git pull origin main\n" +
+    "git push origin feature/x - Invia commit al remoto. Esempio: git push origin feature/profile\n" +
+    "git merge feature/x - Unisce branch. Esempio: git merge feature/profile\n" +
+    "git diff - Mostra modifiche non committate. Esempio: git diff\n" +
+    "git log - Visualizza cronologia commit. Esempio: git log\n" +
+    "git log --oneline - Cronologia compatta. Esempio: git log --oneline",
+
+  // Best practice moderne (molto rilevanti per lavoro reale)
+  bestPractices:
+    "Commit piccoli e frequenti\n" +
+    "Messaggi chiari con Conventional Commits\n" +
+    "Non lavorare mai direttamente su main\n" +
+    "Pull request sempre prima del merge\n" +
+    "Code review per qualità e conoscenza condivisa\n" +
+    "Sincronizza spesso il tuo branch con main\n" +
+    "Evita force push su branch condivisi\n" +
+    "Usa .gitignore per non versionare file sensibili",
+
+  // Workflow reale usato in team e startup
+  workflow:
+    "1. Clona il progetto\n" +
+    "2. Crea un branch feature\n" +
+    "3. Lavora e fai commit\n" +
+    "4. Push del branch\n" +
+    "5. Apri pull request\n" +
+    "6. Code review\n" +
+    "7. Merge su main\n" +
+    "8. Deploy automatico",
+
+  reflectionQuestions:
+    "Quando usare merge e quando rebase?\n" +
+    "Quali rischi ha il force push su branch condivisi?\n" +
+    "Perché non lavorare direttamente su main?",
+
+  homework:
+    "Esercizio 1: Crea un repository con README e almeno 3 commit.\n" +
+    "Esercizio 2: Simula un conflitto e risolvilo.\n" +
+    "Esercizio 3: Apri una pull request tra due branch.\n" +
+    "Esercizio 4: Scrivi commit con formato Conventional Commits.",
+
+  isCompleted: false,
 };
 
 export default lesson01;

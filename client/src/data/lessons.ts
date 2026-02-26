@@ -1,16 +1,24 @@
+
+// lessons.ts
+
 export type CourseLesson = {
   id: number;
   lessonNumber: number;
   title: string;
   module: string;
   objectives: string;
+  image?: string; // URL immagine introduttiva
   topics: string;
   homework: string;
   commands: string;
   reflectionQuestions: string;
   isCompleted: boolean;
   isLocked?: boolean;
+  bestPractices?: string; // Sezione extra per best practice moderne
+  workflow?: string; // Sezione extra per workflow reale usato in team
 };
+
+// seed.ts
 
 import lesson01 from "./lessons/lesson-01";
 import lesson02 from "./lessons/lesson-02";
@@ -24,6 +32,10 @@ import lesson09 from "./lessons/lesson-09";
 import lesson10 from "./lessons/lesson-10";
 import lesson11 from "./lessons/lesson-11";
 
+/**
+ * 🔥 Seed principale del corso
+ * Ordinato automaticamente per sicurezza
+ */
 export const LESSONS_SEED: CourseLesson[] = [
   lesson01,
   lesson02,
@@ -36,4 +48,4 @@ export const LESSONS_SEED: CourseLesson[] = [
   lesson09,
   lesson10,
   lesson11,
-];
+].sort((a, b) => a.lessonNumber - b.lessonNumber);
