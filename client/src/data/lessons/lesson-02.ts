@@ -36,7 +36,6 @@ Nota: React ottimizza gli aggiornamenti, migliorando le performance percepite.
 JSX combina JavaScript e markup. Regole principali:
 - Un solo elemento padre (uso di fragment '<> </>' se necessario)
 - Espressioni JS dentro '{}'
-- Self-closing tags ('<img />', '<input />')
 - 'className' al posto di 'class'
 👉 Vedi snippet 4.
 
