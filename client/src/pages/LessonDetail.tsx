@@ -3,7 +3,7 @@
 import { useLesson } from "@/hooks/use-lessons";
 import { Sidebar } from "@/components/Sidebar";
 import { CompletionToggle } from "@/components/CompletionToggle";
-import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2, GraduationCap, AlertTriangle, ClipboardCheck, ImageIcon } from "lucide-react";
+import { Loader2, ArrowLeft, Target, BookOpen, PenTool, CheckCircle2, Terminal, Lightbulb, Lock, Briefcase, Code2, GraduationCap, AlertTriangle, ClipboardCheck, ImageIcon, ExternalLink } from "lucide-react";
 import { Link, useRoute, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -89,6 +89,31 @@ export default function LessonDetail() {
   const situations = enhancement?.situations ?? [];
   const snippets = enhancement?.snippets ?? [];
   const academy = LESSON_ACADEMY[lesson.lessonNumber];
+
+  const isLikelyImageResource = (url: string) => {
+    try {
+      const parsed = new URL(url);
+      const pathname = parsed.pathname.toLowerCase();
+      const hostname = parsed.hostname.toLowerCase();
+
+      return (
+        /\.(png|jpe?g|gif|webp|svg|avif)$/i.test(pathname) ||
+        hostname === "media.licdn.com" ||
+        pathname.includes("/image") ||
+        pathname.includes("article-cover_image")
+      );
+    } catch {
+      return false;
+    }
+  };
+
+  const getResourceLabel = (url: string) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+    }
+  };
 
   return (
     <div className="flex min-h-[calc(100vh-8rem)] bg-background font-sans selection:bg-primary/10">
@@ -359,9 +384,25 @@ export default function LessonDetail() {
                 </div>
                 <div className="grid gap-6">
                   {resources.map((url, i) => (
-                    <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="block rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-all">
-                      <img src={url} alt={`Risorsa ${i + 1}`} className="w-full object-contain bg-white" loading="lazy" />
-                    </a>
+                    isLikelyImageResource(url) ? (
+                      <a key={i} href={url} target="_blank" rel="noopener noreferrer" className="block rounded-xl overflow-hidden border border-primary/20 hover:border-primary/50 transition-all">
+                        <img src={url} alt={`Risorsa ${i + 1}`} className="w-full object-contain bg-white" loading="lazy" />
+                      </a>
+                    ) : (
+                      <a
+                        key={i}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between gap-4 rounded-xl border border-primary/20 bg-card p-5 hover:border-primary/50 transition-all"
+                      >
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-foreground">Risorsa esterna</p>
+                          <p className="truncate text-sm text-muted-foreground">{getResourceLabel(url)}</p>
+                        </div>
+                        <ExternalLink className="h-4 w-4 flex-shrink-0 text-primary" />
+                      </a>
+                    )
                   ))}
                 </div>
               </section>

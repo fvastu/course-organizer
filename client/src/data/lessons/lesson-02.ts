@@ -75,6 +75,10 @@ Esercizio 2: Tipizza tutte le props con interfacce TypeScript.
 Esercizio 3: Crea un file config.ts e passa tutti i dati tramite props.
 Bonus: rendi componenti riutilizzabili come Button e Card con varianti tipizzate.`,
 
+  resources: `https://reactrouter.com/how-to/spa
+https://media.licdn.com/dms/image/v2/D4D12AQG4QVjwHUhQ7w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1709405757285?e=2147483647&v=beta&t=eEH08CgdhUoItOJLvhw0kD4U90lMhKevOwnjFsi9EF0
+https://www.ionos.it/digitalguide/fileadmin/DigitalGuide/Schaubilder/rappresentazione-grafica-di-un-albero-dom.png`,
+
   bestPractices: `1. Non manipolare il DOM direttamente.
 2. Pensa sempre in componenti.
 3. Mantieni i componenti piccoli e con una sola responsabilità.
