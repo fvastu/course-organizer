@@ -7,10 +7,11 @@ export const lesson03: CourseLesson = {
   module: "Modulo React",
   isCompleted: false,
 
-  objectives: `• Comprendere davvero cos'e lo stato e quando usarlo
-• Gestire eventi utente con onClick, onChange e onSubmit
-• Costruire form controllati con validazione progressiva
-• Aggiornare array e oggetti in modo immutabile e sicuro`,
+  objectives: `• Comprendere davvero cos'e lo stato e distinguere stato, props e variabili normali
+• Gestire eventi utente con onClick, onChange, onBlur e onSubmit
+• Costruire form controllati con validazione progressiva e buona UX
+• Aggiornare array e oggetti in modo immutabile e sicuro
+• Modellare piccoli flussi interattivi reali come login, filtri e task form`,
 
   topics: `1. Cos’è lo stato in React
 Lo stato e il dato che puo cambiare nel tempo dentro un componente e che, quando cambia, provoca un nuovo render. Serve per rappresentare cio che l'utente modifica: input, contatori, checkbox, filtri, task completati.
@@ -50,6 +51,16 @@ Mutare direttamente produce bug difficili da tracciare e impedisce a React di ca
 8. Caso studio: mini task form
 Nel task manager del corso, il form di inserimento task usera stato locale per titolo, priorita, errori e reset del form dopo il submit. Questo collega la teoria a un caso realistico e prepara la lezione successiva sul rendering dinamico.
 👉 Vedi snippet 8.
+
+9. Stato minimo e stato derivato
+Non tutto deve diventare stato. Se un valore puo essere calcolato da altri dati gia presenti, e meglio derivarlo durante il render invece di salvarlo separatamente.
+Esempio: \`isFormValid\` puo essere calcolato da titolo, email e password; salvarlo come stato separato rischia incoerenze.
+Nota pratica: meno stato significa meno bug e meno sincronizzazioni manuali.
+
+10. Errori comuni nei componenti interattivi
+Gli errori tipici sono: leggere stato vecchio dopo un setter, mutare array con \`push\`, dimenticare \`preventDefault()\` nel submit, mostrare messaggi troppo presto o troppo tardi.
+Strategia: modellare bene il flusso evento -> dato -> UI e testare casi reali, non solo il percorso felice.
+
 Mental model finale: evento utente -> update stato -> rerender -> UI aggiornata.`,
 
   commands: `const [count, setCount] = useState(0)
@@ -60,10 +71,11 @@ e.preventDefault()
 setTasks((prev) => [...prev, newTask])
 setTasks((prev) => prev.filter((task) => task.id !== id))`,
 
-  reflectionQuestions: `Qual e la differenza tra una variabile normale e uno stato React?
+  reflectionQuestions: `Qual e la differenza tra una variabile normale, una prop e uno stato React?
 Perche un input controllato e piu affidabile di uno non controllato nei form complessi?
 Quando conviene usare \`setState(prev => ...)\` invece di \`setState(nuovoValore)\`?
-Cosa rischiamo se mutiamo direttamente un array o un oggetto nello stato?`,
+Cosa rischiamo se mutiamo direttamente un array o un oggetto nello stato?
+Quali dati del form conviene derivare invece di salvare come stato separato?`,
 
   homework: `Esercizio 1: Crea un contatore con pulsanti Incrementa, Decrementa e Reset usando update funzionali.
 Esercizio 2: Costruisci un form login controllato con email e password, messaggi di errore inline e submit bloccato se i dati sono invalidi.
@@ -83,7 +95,9 @@ https://react.dev/learn/updating-objects-in-state
 5. Usa update funzionali quando dipendi dal valore precedente.
 6. Non mutare mai direttamente array e oggetti nello stato.
 7. Dai nomi espliciti agli handler: \`handleSubmit\`, \`handleChange\`, \`toggleTask\`.
-8. Se la logica del form cresce troppo, spezzala in funzioni chiare o componenti dedicati.`,
+8. Se la logica del form cresce troppo, spezzala in funzioni chiare o componenti dedicati.
+9. Tieni separati dati, errori e stato di submit per non mescolare responsabilita.
+10. Prima di aggiungere nuova logica, chiediti sempre: e davvero stato o posso derivarlo?`,
 
   snippets: `1. Stato base con useState
 tsx

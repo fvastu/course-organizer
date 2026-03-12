@@ -86,10 +86,16 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
     examples: [
       "Form login controllato con feedback immediato su email/password.",
       "Contatore con step dinamico e reset per capire update funzionali.",
+      "Task form con titolo, priorita e bottone submit disabilitato finche il dato non e valido.",
+      "Filtro ricerca live: l'utente digita e la UI reagisce in tempo reale senza refresh pagina.",
+      "Checkbox 'completato' che aggiorna lo stato locale di una task card senza toccare il DOM manualmente.",
     ],
     situations: [
       "Validazione solo al submit: utente scopre errori troppo tardi.",
       "Aggiornamento stato con valore vecchio: comportamenti incoerenti.",
+      "Array task mutato con `push`: il componente non esprime chiaramente la transizione di stato.",
+      "Campo input che usa `defaultValue` ma anche stato React: doppia fonte di verita e bug intermittenti.",
+      "Errore mostrato appena la pagina apre, prima che l'utente tocchi il form: UX aggressiva.",
     ],
     snippets: [
       {
@@ -101,6 +107,16 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
         title: "Aggiornamento funzionale sicuro",
         language: "tsx",
         code: "const [count, setCount] = useState(0);\n\n<button onClick={() => setCount((prev) => prev + 1)}>\n  Incrementa\n</button>",
+      },
+      {
+        title: "Oggetto form aggiornato in modo immutabile",
+        language: "tsx",
+        code: "const [form, setForm] = useState({ email: \"\", password: \"\" });\n\nfunction handleEmailChange(value: string) {\n  setForm((prev) => ({ ...prev, email: value }));\n}",
+      },
+      {
+        title: "Submit con validazione e reset",
+        language: "tsx",
+        code: "function handleSubmit(e: React.FormEvent) {\n  e.preventDefault();\n  if (!title.trim()) {\n    setError(\"Titolo obbligatorio\");\n    return;\n  }\n\n  setTasks((prev) => [...prev, { id: crypto.randomUUID(), title }]);\n  setTitle(\"\");\n  setError(\"\");\n}",
       },
     ],
   },

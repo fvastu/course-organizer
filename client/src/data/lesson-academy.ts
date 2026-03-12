@@ -184,16 +184,19 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     context: [
       "Scenario login: validazione in tempo reale su email e password.",
       "Scenario dashboard: contatori e filtri che reagiscono agli eventi utente.",
+      "Scenario task manager: form di inserimento e modifica task con reset, errori e submit controllato.",
     ],
     sections: [
       {
         title: "useState in pratica",
         paragraphs: [
           "L'aggiornamento e asincrono e batchato: ragiona in termini di prossimo stato, non stato immediato.",
+          "Una variabile locale si resetta a ogni render; lo stato invece persiste tra render successivi e rappresenta la memoria del componente.",
         ],
         bullets: [
           "Usa update funzionali quando dipendi dal valore precedente",
           "Mantieni stato minimo indispensabile",
+          "Distingui stato persistente da valori derivabili",
         ],
       },
       {
@@ -204,16 +207,36 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         ],
         bullets: ["onChange + value", "Feedback contestuale", "Submit robusto"],
       },
+      {
+        title: "Immutabilita e shape dei dati",
+        paragraphs: [
+          "Array e oggetti in stato vanno trattati come snapshot immutabili: aggiorniamo creando una nuova copia, non modificando quella esistente.",
+          "Progettare bene la shape dello stato evita strutture fragili: un form puo usare stringhe separate o un oggetto `form`, ma la scelta deve restare coerente.",
+        ],
+        bullets: ["Spread operator", "map/filter al posto di mutazioni", "Shape chiara e consistente"],
+      },
+      {
+        title: "Casi reali da frontend junior",
+        paragraphs: [
+          "Un bottone submit dovrebbe riflettere il vero stato del form: idle, invalid, submitting, success o error.",
+          "Un messaggio di errore deve comparire nel momento giusto: troppo presto infastidisce, troppo tardi rallenta l'utente.",
+        ],
+        bullets: ["Disabilita submit quando serve", "Reset esplicito dopo azione riuscita", "Gestisci happy path e edge case"],
+      },
     ],
     commonMistakes: [
       "Doppia fonte di verita tra DOM e stato React",
       "Validazione solo finale senza contesto",
       "Mutazione diretta di oggetti in stato",
+      "Salvare in stato valori che possono essere derivati",
+      "Mescolare dati del form, errori e loading nello stesso valore poco leggibile",
     ],
     checklist: [
       "Ogni input usa value e onChange",
       "Gli errori appaiono vicino al campo",
       "Uso setState funzionale dove necessario",
+      "Array e oggetti vengono aggiornati senza mutazioni dirette",
+      "Il submit gestisce sia successo che invalidazione",
     ],
     snapshots: [
       {
