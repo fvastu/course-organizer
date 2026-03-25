@@ -89,6 +89,7 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
       "Task form con titolo, priorita e bottone submit disabilitato finche il dato non e valido.",
       "Filtro ricerca live: l'utente digita e la UI reagisce in tempo reale senza refresh pagina.",
       "Checkbox 'completato' che aggiorna lo stato locale di una task card senza toccare il DOM manualmente.",
+      "Wizard multi-step semplice: il parent conserva lo stato dei passi, i child ricevono dati e callback.",
     ],
     situations: [
       "Validazione solo al submit: utente scopre errori troppo tardi.",
@@ -96,6 +97,7 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
       "Array task mutato con `push`: il componente non esprime chiaramente la transizione di stato.",
       "Campo input che usa `defaultValue` ma anche stato React: doppia fonte di verita e bug intermittenti.",
       "Errore mostrato appena la pagina apre, prima che l'utente tocchi il form: UX aggressiva.",
+      "Form con troppi `useState` scollegati e naming confuso: il codice funziona ma diventa difficile da evolvere.",
     ],
     snippets: [
       {
@@ -117,6 +119,11 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
         title: "Submit con validazione e reset",
         language: "tsx",
         code: "function handleSubmit(e: React.FormEvent) {\n  e.preventDefault();\n  if (!title.trim()) {\n    setError(\"Titolo obbligatorio\");\n    return;\n  }\n\n  setTasks((prev) => [...prev, { id: crypto.randomUUID(), title }]);\n  setTitle(\"\");\n  setError(\"\");\n}",
+      },
+      {
+        title: "Valore derivato invece di stato duplicato",
+        language: "tsx",
+        code: "const [tasks, setTasks] = useState<Task[]>([]);\n\nconst completedCount = tasks.filter((task) => task.done).length;\nconst hasCompletedTasks = completedCount > 0;",
       },
     ],
   },

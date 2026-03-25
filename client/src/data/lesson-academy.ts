@@ -180,7 +180,7 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
   },
   3: {
     intro:
-      "Lo stato governa il comportamento dell'interfaccia: capire quando e come aggiornarlo evita il 70% dei bug UI.",
+      "Lo stato governa il comportamento dell'interfaccia: quando impari a modellarlo bene, smetti di combattere React e inizi a usarlo con intenzione.",
     context: [
       "Scenario login: validazione in tempo reale su email e password.",
       "Scenario dashboard: contatori e filtri che reagiscono agli eventi utente.",
@@ -188,10 +188,11 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     ],
     sections: [
       {
-        title: "useState in pratica",
+        title: "Mental model corretto di useState",
         paragraphs: [
-          "L'aggiornamento e asincrono e batchato: ragiona in termini di prossimo stato, non stato immediato.",
+          "L'aggiornamento e pianificato da React e puo essere batchato: ragiona sempre in termini di prossimo stato, non di mutazione immediata.",
           "Una variabile locale si resetta a ogni render; lo stato invece persiste tra render successivi e rappresenta la memoria del componente.",
+          "Quando il nuovo valore dipende dal precedente, l'update funzionale non e un dettaglio stilistico: e la forma piu robusta.",
         ],
         bullets: [
           "Usa update funzionali quando dipendi dal valore precedente",
@@ -200,28 +201,31 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
         ],
       },
       {
-        title: "Form controllati",
+        title: "Controlled form e timing del feedback",
         paragraphs: [
-          "Input controllato significa sorgente di verita nel componente React.",
-          "La validazione progressiva migliora UX e riduce errori al submit.",
+          "Input controllato significa sorgente di verita nel componente React, non nel DOM.",
+          "La validazione progressiva migliora UX, ma deve essere mostrata nel momento giusto: troppo presto disturba, troppo tardi rallenta.",
+          "Un buon form esplicita i suoi stati: idle, editing, invalid, submitting, success o error.",
         ],
-        bullets: ["onChange + value", "Feedback contestuale", "Submit robusto"],
+        bullets: ["onChange + value", "Feedback contestuale", "Submit robusto", "Niente doppia fonte di verita"],
       },
       {
-        title: "Immutabilita e shape dei dati",
+        title: "Shape dello stato e immutabilita",
         paragraphs: [
           "Array e oggetti in stato vanno trattati come snapshot immutabili: aggiorniamo creando una nuova copia, non modificando quella esistente.",
           "Progettare bene la shape dello stato evita strutture fragili: un form puo usare stringhe separate o un oggetto `form`, ma la scelta deve restare coerente.",
+          "Non esiste una shape universalmente migliore: conta leggibilita, chiarezza dei flussi e facilita di manutenzione.",
         ],
-        bullets: ["Spread operator", "map/filter al posto di mutazioni", "Shape chiara e consistente"],
+        bullets: ["Spread operator", "map/filter al posto di mutazioni", "Shape chiara e consistente", "Deriva invece di duplicare"],
       },
       {
-        title: "Casi reali da frontend junior",
+        title: "Tradeoff e casi reali da frontend junior",
         paragraphs: [
           "Un bottone submit dovrebbe riflettere il vero stato del form: idle, invalid, submitting, success o error.",
           "Un messaggio di errore deve comparire nel momento giusto: troppo presto infastidisce, troppo tardi rallenta l'utente.",
+          "Molti bug dei junior non sono di sintassi ma di modellazione: troppo stato, stato duplicato, mutazioni nascoste, responsabilita mischiate.",
         ],
-        bullets: ["Disabilita submit quando serve", "Reset esplicito dopo azione riuscita", "Gestisci happy path e edge case"],
+        bullets: ["Disabilita submit quando serve", "Reset esplicito dopo azione riuscita", "Gestisci happy path e edge case", "Preferisci chiarezza a scorciatoie intelligenti"],
       },
     ],
     commonMistakes: [
@@ -230,6 +234,8 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
       "Mutazione diretta di oggetti in stato",
       "Salvare in stato valori che possono essere derivati",
       "Mescolare dati del form, errori e loading nello stesso valore poco leggibile",
+      "Usare setState con valore corrente quando l'update dipende dal precedente",
+      "Mostrare errori appena la pagina apre senza che l'utente abbia interagito",
     ],
     checklist: [
       "Ogni input usa value e onChange",
@@ -237,6 +243,8 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
       "Uso setState funzionale dove necessario",
       "Array e oggetti vengono aggiornati senza mutazioni dirette",
       "Il submit gestisce sia successo che invalidazione",
+      "Ho separato dati persistenti da valori derivati",
+      "La shape dello stato e comprensibile a colpo d'occhio",
     ],
     snapshots: [
       {
