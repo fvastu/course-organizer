@@ -255,32 +255,61 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     ],
   },
   4: {
-    intro: "Rendering dinamico significa tradurre dati in struttura visiva mantenendo identita stabile degli elementi.",
+    intro:
+      "Rendering dinamico significa trasformare dati in UI senza perdere l'identita degli elementi e senza confondere i vari stati della schermata.",
     context: [
-      "Scenario task board con lista variabile e filtri.",
-      "Scenario ecommerce con catalogo e stati vuoti.",
+      "Scenario task board con task aggiunte, rimosse e filtrate in tempo reale.",
+      "Scenario ecommerce con catalogo vuoto, filtri attivi e stati 'nessun risultato'.",
     ],
     sections: [
       {
-        title: "Liste e key",
+        title: "Liste e key come contratto di identita",
         paragraphs: [
-          "La key non e un dettaglio: e il contratto di identita tra dato e nodo renderizzato.",
+          "La key non e un dettaglio: e il contratto di identita tra il dato e il nodo renderizzato da React.",
+          "Quando aggiungi, rimuovi o riordini elementi, una key stabile evita che React riusi il nodo sbagliato.",
         ],
-        bullets: ["Usa ID stabili", "Evita index su liste mutate"],
+        bullets: [
+          "Usa ID stabili dal dato",
+          "Evita index su liste mutate",
+          "Non generare key casuali a ogni render",
+        ],
       },
       {
-        title: "Condizioni leggibili",
+        title: "Conditional rendering progettato bene",
         paragraphs: [
-          "Una UI robusta mostra stati loading, empty, success, error in modo esplicito.",
+          "Una UI robusta mostra stati loading, empty, success, error e no-results in modo esplicito.",
+          "Le condizioni brevi stanno bene nel JSX; quelle complesse meritano variabili o componenti dedicati.",
         ],
-        bullets: ["Ternary per biforcazioni brevi", "Componenti dedicati per stati complessi"],
+        bullets: [
+          "Ternary per biforcazioni brevi",
+          "&& per dettagli opzionali",
+          "Componenti dedicati per stati complessi",
+        ],
+      },
+      {
+        title: "Empty state e viste derivate",
+        paragraphs: [
+          "Uno stato vuoto non e solo assenza di dati: e un momento di orientamento dell'utente.",
+          "Filtri e conteggi dovrebbero derivare dalla lista originale, non distruggerla o duplicarla.",
+        ],
+        bullets: [
+          "Distingui lista vuota da filtro senza risultati",
+          "Deriva visibleCount e completedCount",
+          "Rimuovi elementi con filter in modo immutabile",
+        ],
       },
     ],
-    commonMistakes: ["Key instabili", "Filtri distruttivi", "Empty state assente"],
+    commonMistakes: [
+      "Key instabili o basate su index",
+      "Filtri che sovrascrivono la sorgente originale",
+      "Ternary annidati difficili da leggere",
+      "Empty state assente o senza call to action",
+    ],
     checklist: [
       "Ogni lista usa key stabile",
-      "Esistono stati vuoti e di errore",
+      "Esistono stati vuoti e no-results distinti",
       "I filtri non mutano la sorgente originale",
+      "La rimozione dei task avviene con update immutabile",
     ],
     snapshots: [
       {
