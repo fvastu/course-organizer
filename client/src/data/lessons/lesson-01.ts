@@ -77,6 +77,42 @@ export const lesson01: CourseLesson = {
     "https://images.prismic.io/hatica/27290fcd-a24b-445e-b639-627031a9bcb7_log+1.png?auto=compress,format&rect=0,0,1312,1008&w=1200&h=922\n" +
     "https://geo-jobe.com/wp-content/uploads/2022/07/DefaultMergeCropped.png",
 
+  snippets:
+    "1. Flusso base repository locale\n" +
+    "bash\n" +
+    "git init\n" +
+    "git add README.md\n" +
+    "git commit -m \"docs: add initial readme\"\n" +
+    "git branch -M main\n" +
+    "git remote add origin https://github.com/org/progetto.git\n" +
+    "git push -u origin main\n" +
+    "---\n" +
+    "2. Feature branch pulito\n" +
+    "bash\n" +
+    "git switch main\n" +
+    "git pull origin main\n" +
+    "git switch -c feature/profile-page\n" +
+    "git add src/profile.tsx\n" +
+    "git commit -m \"feat(profile): add profile page shell\"\n" +
+    "git push -u origin feature/profile-page\n" +
+    "---\n" +
+    "3. Merge conflict essenziale\n" +
+    "bash\n" +
+    "git switch main\n" +
+    "git pull origin main\n" +
+    "git merge feature/profile-page\n" +
+    "# risolvi i marker <<<<<<< ======= >>>>>>>\n" +
+    "git add README.md\n" +
+    "git commit -m \"merge: resolve README conflict\"\n" +
+    "---\n" +
+    "4. Tag di release annotato\n" +
+    "bash\n" +
+    "git checkout main\n" +
+    "git pull origin main\n" +
+    "git tag -a v1.0.0 -m \"release 1.0.0\"\n" +
+    "git push origin main\n" +
+    "git push origin v1.0.0",
+
   isCompleted: false,
 };
 
