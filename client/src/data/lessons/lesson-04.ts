@@ -42,6 +42,8 @@ Piuttosto che nascondere parti via CSS, spesso e meglio non renderizzarle affatt
 - per logica complessa, meglio una variabile intermedia o un return separato
 👉 Vedi snippet 4.
 Best practice: privilegia leggibilita e intenzione, non la forma piu corta.
+⚠️ Attenzione al gotcha di \`&&\` con valori falsy numerici: \`{count && <List />}\` renderizza \`0\` a schermo quando \`count === 0\`, perche React mostra i numeri. Usa sempre \`{count > 0 && <List />}\` o un ternary esplicito.
+👉 Vedi snippet 4b.
 
 6. Empty states utili, non vuoti
 Uno stato "nessun elemento" non deve sembrare un errore tecnico. Deve spiegare cosa sta succedendo e suggerire il prossimo passo.
@@ -211,6 +213,26 @@ function TaskSummary({
       <h2>{total > 0 ? "Task totali: " + total : "Nessun task"}</h2>
       {hasOverdue && <p>Hai task in scadenza oggi.</p>}
     </section>
+  );
+}
+---
+4b. Gotcha: && con valore numerico 0
+tsx
+// BUG: se tasks.length e 0, React renderizza "0" a schermo
+function BuggyCounter({ tasks }: { tasks: { id: string }[] }) {
+  return (
+    <div>
+      {tasks.length && <p>Hai {tasks.length} task</p>}
+    </div>
+  );
+}
+
+// FIX: confronto esplicito che produce un booleano
+function FixedCounter({ tasks }: { tasks: { id: string }[] }) {
+  return (
+    <div>
+      {tasks.length > 0 && <p>Hai {tasks.length} task</p>}
+    </div>
   );
 }
 ---

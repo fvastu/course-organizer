@@ -135,6 +135,7 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
     situations: [
       "Uso di `index` come key con reorder: React riusa nodi sbagliati.",
       "Filtri applicati mutando lo stato originale: risultato non recuperabile.",
+      "`{count && <List />}` con count a 0: React renderizza '0' a schermo invece di nulla.",
     ],
     snippets: [
       {
@@ -153,10 +154,14 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
     examples: [
       "Ricerca e filtri nel parent, lista e toolbar come child presentazionali.",
       "Layout `Card` con `children` riusato in dashboard e dettagli.",
+      "TaskSummary che riceve solo valori derivati (total, done, visible) senza accesso alla lista.",
+      "Toolbar che emette `onQueryChange` e `onFilterChange` senza conoscere la logica di filtro.",
     ],
     situations: [
       "Filtro duplicato in due componenti: logiche diverse e bug intermittenti.",
       "Child modifica dati globali senza callback esplicita: flusso poco chiaro.",
+      "Stato alzato troppo in alto (in App): tutti i componenti ricevono props che non usano.",
+      "setTasks passato direttamente al child: il child puo fare qualsiasi cosa con lo stato.",
     ],
     snippets: [
       {
@@ -168,6 +173,16 @@ export const LESSON_ENHANCEMENTS: Record<number, LessonEnhancement> = {
         title: "Componente wrapper",
         language: "tsx",
         code: "function Card({ children }: { children: React.ReactNode }) {\n  return <div className=\"rounded-xl border p-4\">{children}</div>;\n}",
+      },
+      {
+        title: "Callback tipizzata vs setter diretto",
+        language: "tsx",
+        code: "// Meglio: callback con intenzione chiara\n<TaskCard onDeleteTask={(id) => handleDelete(id)} />\n\n// Peggio: setter esposto direttamente\n<TaskCard setTasks={setTasks} />",
+      },
+      {
+        title: "Stato derivato combinato",
+        language: "tsx",
+        code: "const visibleTasks = tasks.filter((task) => {\n  const matchesQuery = task.title\n    .toLowerCase()\n    .includes(query.toLowerCase());\n  const matchesFilter =\n    filter === \"all\" || (filter === \"done\" ? task.done : !task.done);\n  return matchesQuery && matchesFilter;\n});",
       },
     ],
   },

@@ -304,6 +304,7 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
       "Filtri che sovrascrivono la sorgente originale",
       "Ternary annidati difficili da leggere",
       "Empty state assente o senza call to action",
+      "`&&` con valore numerico 0 che renderizza '0' a schermo invece di nascondere il blocco",
     ],
     checklist: [
       "Ogni lista usa key stabile",
@@ -320,29 +321,67 @@ export const LESSON_ACADEMY: Record<number, LessonAcademyContent> = {
     ],
   },
   5: {
-    intro: "La composizione avanzata ti permette di scalare il codice mantenendo chiarezza e riducendo accoppiamento.",
+    intro: "La composizione avanzata ti permette di scalare il codice mantenendo chiarezza e riducendo accoppiamento. Quando piu componenti condividono dati, il problema non e piu scrivere JSX ma distribuire bene responsabilita e stato.",
     context: [
-      "Scenario board con toolbar e lista che condividono filtri.",
-      "Scenario enterprise con layout riusabili in pagine diverse.",
+      "Scenario board con toolbar e lista che condividono filtri e ricerca in tempo reale.",
+      "Scenario enterprise con layout riusabili (Card, Panel, Modal) in pagine diverse.",
+      "Scenario dashboard con summary, lista e azioni che dipendono tutti dallo stesso stato.",
     ],
     sections: [
       {
-        title: "Lifting state up",
+        title: "Lifting state up e posizionamento dello stato",
         paragraphs: [
-          "Lo stato va posizionato nel punto piu alto che serve ai componenti coinvolti, non oltre.",
+          "Lo stato va posizionato nel punto piu alto che serve ai componenti coinvolti, ma non piu in alto del necessario.",
+          "Troppo in alto causa prop drilling e componenti rumorosi. Troppo in basso causa dati duplicati e UI che si disallineano.",
+          "Il criterio pratico: se solo TaskToolbar e TaskList usano query, lo stato puo stare in TaskBoard, non per forza in App.",
         ],
-        bullets: ["Evita prop drilling eccessivo", "Introduci contesto solo quando necessario"],
+        bullets: [
+          "Trova il piu basso antenato comune",
+          "Evita prop drilling eccessivo",
+          "Non centralizzare prematuramente in App o Context",
+        ],
       },
       {
-        title: "Stato derivato",
+        title: "Stato derivato e callback props",
         paragraphs: [
           "Se un valore puo essere calcolato da altri dati, derivarlo evita incoerenze e duplicazioni.",
+          "I dati scendono via props, gli eventi risalgono via callback. Un child non deve mai mutare direttamente lo stato del parent.",
+          "Usa nomi che descrivono l'intenzione: onDeleteTask comunica meglio di setTasks passato ovunque.",
         ],
-        bullets: ["No copie inutili", "No sincronizzazioni manuali fragili"],
+        bullets: [
+          "No copie inutili di liste filtrate nello stato",
+          "No sincronizzazioni manuali fragili",
+          "Callback tipizzate con nomi descrittivi",
+        ],
+      },
+      {
+        title: "Composizione e separazione delle responsabilita",
+        paragraphs: [
+          "La prop children permette di creare wrapper riusabili che separano struttura e contenuto.",
+          "Un componente smart gestisce stato e trasformazioni. Un componente presentazionale riceve dati pronti e si concentra sulla UI.",
+          "Non e una regola rigida, ma un mental model per mantenere i componenti leggibili quando il progetto cresce.",
+        ],
+        bullets: [
+          "Usa children per layout e wrapper riusabili",
+          "Separa container e presentazionali quando il file inizia a pesare",
+          "Se un componente e difficile da nominare, probabilmente fa troppe cose",
+        ],
       },
     ],
-    commonMistakes: ["Stato duplicato", "Callback non tipizzate", "Componenti troppo intelligenti"],
-    checklist: ["Stato unico per i dati condivisi", "UI separata dalla logica", "Derivazioni calcolate on-demand"],
+    commonMistakes: [
+      "Stato duplicato: tasks e filteredTasks salvati entrambi in useState",
+      "Callback non tipizzate o con nomi generici come handle o onChange",
+      "Componenti troppo intelligenti che filtrano, ordinano, mutano e gestiscono layout",
+      "Child che muta un array ricevuto via props invece di notificare il parent",
+      "Prop drilling di 5+ livelli quando una riorganizzazione della gerarchia basterebbe",
+    ],
+    checklist: [
+      "Esiste una sola sorgente di verita per ogni dato condiviso",
+      "I child sono presentazionali e ricevono dati gia pronti",
+      "Filtri, ricerche e conteggi sono derivati, non stato separato",
+      "Le callback hanno nomi descrittivi e tipi espliciti",
+      "I wrapper con children sono riusati in almeno 2-3 punti",
+    ],
     snapshots: [
       {
         title: "Architettura parent/child",

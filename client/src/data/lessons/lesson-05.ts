@@ -75,7 +75,8 @@ Questo pattern e riusabile in dashboard, cataloghi, inbox e pannelli admin.
 10. Regola finale di progettazione
 Se un componente sta diventando difficile da nominare, probabilmente sta facendo troppe cose.
 Se per capire chi cambia cosa devi inseguire cinque file, il flusso dati va semplificato.
-Se la stessa informazione esiste in due stati diversi, quasi certamente hai introdotto una fonte di bug evitabile.`,
+Se la stessa informazione esiste in due stati diversi, quasi certamente hai introdotto una fonte di bug evitabile.
+Questa lezione prende le basi di rendering dinamico della lezione 4 e le scala verso architetture multi-componente. La lezione 6 introdurra gli effetti collaterali per connettere questa struttura al mondo esterno.`,
 
   commands: `const [tasks, setTasks] = useState<Task[]>([]) - stato sorgente nel parent
 const [query, setQuery] = useState("") - filtro di ricerca condiviso
@@ -218,9 +219,23 @@ function Panel({
 ---
 6. Flusso completo board -> toolbar -> list
 tsx
+type Task = { id: string; title: string; done: boolean };
+
 function TaskBoard() {
+  const [tasks, setTasks] = useState<Task[]>(seedTasks);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "open" | "done">("all");
+
+  const visibleTasks = tasks.filter((task) => {
+    const matchesQuery = task.title.toLowerCase().includes(query.toLowerCase());
+    const matchesFilter =
+      filter === "all" ? true : filter === "done" ? task.done : !task.done;
+    return matchesQuery && matchesFilter;
+  });
+
+  const handleDeleteTask = (id: string) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
 
   return (
     <>
@@ -231,9 +246,24 @@ function TaskBoard() {
         onFilterChange={setFilter}
       />
       <TaskList tasks={visibleTasks} onDeleteTask={handleDeleteTask} />
+      <TaskSummary total={tasks.length} visible={visibleTasks.length} />
     </>
   );
-}`,
+}
+---
+7. Anti-pattern: stato duplicato vs derivato
+tsx
+// SBAGLIATO: due stati che devono restare sincronizzati
+const [tasks, setTasks] = useState<Task[]>(seedTasks);
+const [filteredTasks, setFilteredTasks] = useState<Task[]>(seedTasks);
+
+// Ogni volta che tasks cambia, devi ricordarti di aggiornare anche filteredTasks.
+// Se dimentichi, la UI mostra dati stale.
+
+// CORRETTO: una sola sorgente, una vista derivata
+const [tasks, setTasks] = useState<Task[]>(seedTasks);
+const filteredTasks = tasks.filter((task) => task.done);
+// filteredTasks e sempre coerente con tasks, zero rischio di disallineamento.`,
 };
 
 export default lesson05;
